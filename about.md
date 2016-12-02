@@ -10,7 +10,7 @@ Este projeto é open source e gerado automaticamente pelo Jenkins, você pode en
 
 ## O que precisa ser feito?
 
-Estamos controlando tudo o que precisa ser feito através das issues, as labels azuis (enhancement) descrevem melhorias, as vermelhas são bugs a corrigir e as amarelas artigos a escrever, fique a vontade para discutir nas issues ou enviar pull requests para resolve-las, é uma boa ideia avisar que vai trabalhar em alguma coisa na issues, evitando que outra pessoa acabe perdendo tempo, da mesma forma, não é vergonhoso informar que não vai poder dar seguimento a uma tarefa, abrindo a oportunidade para outro.
+Estamos controlando tudo o que precisa ser feito através das [issues](https://github.com/CakePHPBrasil/blog/issues), as labels azuis (enhancement) descrevem melhorias, as vermelhas são bugs a corrigir e as amarelas artigos a escrever, fique a vontade para discutir nas issues ou enviar pull requests para resolve-las, é uma boa ideia avisar que vai trabalhar em alguma coisa na issues, evitando que outra pessoa acabe perdendo tempo, da mesma forma, não é vergonhoso informar que não vai poder dar seguimento a uma tarefa, abrindo a oportunidade para outro.
 
 ## Tenho uma dúvida
 
