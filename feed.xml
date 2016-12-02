@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2016-12-02T16:27:12-05:00</updated><id>//</id><title type="html">CakePHP Brasil</title><subtitle>CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido.
+</subtitle><entry><title type="html">Como contribuir!</title><link href="/avisos/2016/12/02/como-controbuir.html" rel="alternate" type="text/html" title="Como contribuir!" /><published>2016-12-02T09:40:06-05:00</published><updated>2016-12-02T09:40:06-05:00</updated><id>/avisos/2016/12/02/como-controbuir</id><content type="html" xml:base="/avisos/2016/12/02/como-controbuir.html">&lt;p&gt;Bem vindos ao novo Blog do CakePHP Brasil, infelizmente o projeto com Wordpress não é muito simples de manter pelo motivo de ser mais um dashboard para acompanhar, algumas pessoas acabaram ficando chateadas comigo, então, em uma tentativa de ressucitar o blog, montei usando Jekyll, Jenkins e GitHub, assim a coisa fica mais automatizada e o gerenciamento se da através do GitHub, aonde eu já estou logado o dia todo.&lt;/p&gt;
+
+&lt;p&gt;Uma vantagem desta nova abordagem é forçar a comunidade a interagir mais com o GitHub e quem sabe contruir seu portfólio por lá.&lt;/p&gt;
+
+&lt;p&gt;Para saber o que tem pra fazer em cada repostório do GitHub do CakePHP Brasil, entre nas issues de cada projeto, por exemplo, você quer ver o que pode ser melhorado neste projeto, visite nossa organização no link &lt;a href=&quot;https://github.com/CakePHPBrasil&quot;&gt;github.com/CakePHPBrasil&lt;/a&gt;, escolha o repositório &lt;strong&gt;blog&lt;/strong&gt; na lista e depois clique em &lt;strong&gt;issues&lt;/strong&gt; no topo, por exemplo, caso você queira ver as ideias de artigos enviadas pela comunidade, &lt;a href=&quot;https://github.com/CakePHPBrasil/blog/issues?q=is%3Aopen+is%3Aissue+label%3Aarticle&quot;&gt;clique aqui&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;quero-enviar-um-artigo&quot;&gt;Quero enviar um artigo&lt;/h2&gt;
+
+&lt;p&gt;Para enviar novos artigos é muito simples, dentro do diretório &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; adicione um arquivo seguindo a seguinte convenção &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-nome-do-post.markdown&lt;/code&gt; em seguida adicione o seu texto usando o formato markdown (é bem simples, não se assuste).&lt;/p&gt;
+
+&lt;p&gt;No topo do arquivo você configura conforme a seguir:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-plan&quot; data-lang=&quot;plan&quot;&gt;---
+layout: post
+title:  &quot;Como contribuir!&quot;
+date:   2016-12-02 12:40:06 -0200
+categories: avisos
+author: 'Erik Figueiredo'
+author_url: 'http://www.webdevbr.com.br'
+author_url_label: 'WebDevBr'
+comments: true
+---&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;layouts&lt;/strong&gt;: define o layout desta página, não altere&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;title&lt;/strong&gt;: Título do artigo&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;date&lt;/strong&gt;: Data da pubicação no formato YYYY-MM-DD HH:MM:SS, o -0200 é o timezone&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;categories&lt;/strong&gt;: Categorias que este artigo pertence, caprixe nisso&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;author&lt;/strong&gt;: Seu nome&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;author_url&lt;/strong&gt;: Um link que você queira postar, para que as pessoas te encontrem, seu portifólio, enfim…&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;author_ur_label&lt;/strong&gt;: O texto ancora para seu link&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;comments&lt;/strong&gt;: habilita e desabilita comentários&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;O Jekyll que faz o build para o HTML fornece alguns recursos legais, como este &lt;strong&gt;code highlight&lt;/strong&gt; a seguir:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;App\Controller&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UsersController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;AppController&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;login&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;sd&quot;&gt;/**...**/&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Assim que receber seu pull request vamos analizar e aceitar ou indicar correções, se necessário.&lt;/p&gt;
+
+&lt;p&gt;Precisa de ideias para artigos ou quer ajudar alguém, &lt;a href=&quot;https://github.com/CakePHPBrasil/blog/issues?q=is%3Aopen+is%3Aissue+label%3Aarticle&quot;&gt;clique aqui&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Qualquer coisa fico a disposição de vocês!&lt;/p&gt;
+
+&lt;p&gt;Obs.: Não esqueçam de adicionar seu nome e um link no fim do artigo para que quem ler e quiser algum serviço ou trocar uma ideia com vocês, possam encontrá-los.&lt;/p&gt;</content><author><name>Erik Figueiredo</name></author><summary type="html">Bem vindos ao novo Blog do CakePHP Brasil, infelizmente o projeto com Wordpress não é muito simples de manter pelo motivo de ser mais um dashboard para acompanhar, algumas pessoas acabaram ficando chateadas comigo, então, em uma tentativa de ressucitar o blog, montei usando Jekyll, Jenkins e GitHub, assim a coisa fica mais automatizada e o gerenciamento se da através do GitHub, aonde eu já estou logado o dia todo.
+
+Uma vantagem desta nova abordagem é forçar a comunidade a interagir mais com o GitHub e quem sabe contruir seu portfólio por lá.
+
+Para saber o que tem pra fazer em cada repostório do GitHub do CakePHP Brasil, entre nas issues de cada projeto, por exemplo, você quer ver o que pode ser melhorado neste projeto, visite nossa organização no link github.com/CakePHPBrasil, escolha o repositório blog na lista e depois clique em issues no topo, por exemplo, caso você queira ver as ideias de artigos enviadas pela comunidade, clique aqui.
+
+Quero enviar um artigo
+
+Para enviar novos artigos é muito simples, dentro do diretório _posts adicione um arquivo seguindo a seguinte convenção YYYY-MM-DD-nome-do-post.markdown em seguida adicione o seu texto usando o formato markdown (é bem simples, não se assuste).
+
+No topo do arquivo você configura conforme a seguir:
+
+---
+layout: post
+title:  &quot;Como contribuir!&quot;
+date:   2016-12-02 12:40:06 -0200
+categories: avisos
+author: 'Erik Figueiredo'
+author_url: 'http://www.webdevbr.com.br'
+author_url_label: 'WebDevBr'
+comments: true
+---
+
+
+  layouts: define o layout desta página, não altere
+  title: Título do artigo
+  date: Data da pubicação no formato YYYY-MM-DD HH:MM:SS, o -0200 é o timezone
+  categories: Categorias que este artigo pertence, caprixe nisso
+  author: Seu nome
+  author_url: Um link que você queira postar, para que as pessoas te encontrem, seu portifólio, enfim…
+  author_ur_label: O texto ancora para seu link
+  comments: habilita e desabilita comentários
+
+
+O Jekyll que faz o build para o HTML fornece alguns recursos legais, como este code highlight a seguir:
+
+&amp;lt;?php
+
+namespace App\Controller;
+
+class UsersController extends AppController
+{
+    public function login()
+    {
+        /**...**/
+    }
+}
+
+Assim que receber seu pull request vamos analizar e aceitar ou indicar correções, se necessário.
+
+Precisa de ideias para artigos ou quer ajudar alguém, clique aqui.
+
+Qualquer coisa fico a disposição de vocês!
+
+Obs.: Não esqueçam de adicionar seu nome e um link no fim do artigo para que quem ler e quiser algum serviço ou trocar uma ideia com vocês, possam encontrá-los.</summary></entry><entry><title type="html">Problemas de _cake_core_ e persistent não gravável</title><link href="/permissao/2015/03/05/problemas-de-_cake_core_e-persistent-nao-gravavel.html" rel="alternate" type="text/html" title="Problemas de _cake_core_ e persistent não gravável" /><published>2015-03-05T09:40:06-05:00</published><updated>2015-03-05T09:40:06-05:00</updated><id>/permissao/2015/03/05/problemas-de-_cake_core_e-persistent-nao-gravavel</id><content type="html" xml:base="/permissao/2015/03/05/problemas-de-_cake_core_e-persistent-nao-gravavel.html">&lt;p&gt;Um problema que pode ser muito comum no Fedora é do” &lt;strong&gt;&lt;em&gt;cake_core&lt;/em&gt; &lt;/strong&gt;…” e do “&lt;strong&gt;… persistent is not writable …&lt;/strong&gt;”:&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;b&gt;Warning&lt;/b&gt;: &lt;em&gt;cake_core&lt;/em&gt; cache was unable to write ‘cake_dev_pt-br’ to File cache in &lt;b&gt;/var/www/html/cakeBlog/lib/Cake/Cache/Cache.php&lt;/b&gt; on line &lt;b&gt;310&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Warning&lt;/b&gt;: /var/www/html/cakeBlog/app/tmp/cache/persistent/ is not writable in &lt;b&gt;/var/www/html/cakeBlog/lib/Cake/Cache/Engine/FileEngine.php&lt;/b&gt; on line &lt;b&gt;337&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Fatal error&lt;/b&gt;: Uncaught exception ‘CacheException’ with message ‘Cache engine &lt;em&gt;cake_core&lt;/em&gt; is not properly configured.’ in /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php:166 Stack trace: #0 /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php(136): Cache::&lt;em&gt;buildEngine(‘_cake_core&lt;/em&gt;’) #1 /var/www/html/cakeBlog/app/Config/core.php(336): Cache::config(‘&lt;em&gt;cake_core&lt;/em&gt;’, Array) #2 /var/www/html/cakeBlog/lib/Cake/Core/Configure.php(78): include(‘/var/www/html/c…’) #3 /var/www/html/cakeBlog/lib/Cake/bootstrap.php(171): Configure::bootstrap(true) #4 /var/www/html/cakeBlog/app/webroot/index.php(92): include(‘/var/www/html/c…’) #5 {main} thrown in &lt;b&gt;/var/www/html/cakeBlog/lib/Cake/Cache/Cache.php&lt;/b&gt; on line &lt;b&gt;166&lt;/b&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Para resolver esse problema é muito simples:&lt;/p&gt;
+&lt;ol&gt;
+	&lt;li&gt;Abre o terminal e execute o seguinte comando (no meu caso usarei o gedit, você pode usar qualquer um de sua preferencia):
+&lt;ol&gt;
+	&lt;li&gt;&lt;em&gt;sudo gedit /etc/selinux/config&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+	&lt;li&gt;Procure a linha &lt;strong&gt;SELINUX&lt;/strong&gt;.&lt;/li&gt;
+	&lt;li&gt;Altera para &lt;strong&gt;disabled&lt;/strong&gt;, ficando assim: &lt;strong&gt;SELINUX=disabled&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Após isso salve e reinicie o computador.&lt;/li&gt;
+	&lt;li&gt;Agora é só colocar as permissões nos arquivos do CakePHP que irá funcionar normalmente.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Link de onde o tutorial foi baseado: &lt;a href=&quot;https://groups.google.com/forum/#!topic/cake-php/ULapxcvVIbs&quot; target=&quot;_blank&quot;&gt;Aqui&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;</content><author><name>Leonardo Siervo Belini</name></author><summary type="html">Um problema que pode ser muito comum no Fedora é do” cake_core …” e do “… persistent is not writable …”:
+
+
+
+
+
+Warning: cake_core cache was unable to write ‘cake_dev_pt-br’ to File cache in /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php on line 310
+
+Warning: /var/www/html/cakeBlog/app/tmp/cache/persistent/ is not writable in /var/www/html/cakeBlog/lib/Cake/Cache/Engine/FileEngine.php on line 337
+
+Fatal error: Uncaught exception ‘CacheException’ with message ‘Cache engine cake_core is not properly configured.’ in /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php:166 Stack trace: #0 /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php(136): Cache::buildEngine(‘_cake_core’) #1 /var/www/html/cakeBlog/app/Config/core.php(336): Cache::config(‘cake_core’, Array) #2 /var/www/html/cakeBlog/lib/Cake/Core/Configure.php(78): include(‘/var/www/html/c…’) #3 /var/www/html/cakeBlog/lib/Cake/bootstrap.php(171): Configure::bootstrap(true) #4 /var/www/html/cakeBlog/app/webroot/index.php(92): include(‘/var/www/html/c…’) #5 {main} thrown in /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php on line 166
+
+
+
+Para resolver esse problema é muito simples:
+
+	Abre o terminal e execute o seguinte comando (no meu caso usarei o gedit, você pode usar qualquer um de sua preferencia):
+
+	sudo gedit /etc/selinux/config
+
+
+	Procure a linha SELINUX.
+	Altera para disabled, ficando assim: SELINUX=disabled
+	Após isso salve e reinicie o computador.
+	Agora é só colocar as permissões nos arquivos do CakePHP que irá funcionar normalmente.
+
+Link de onde o tutorial foi baseado: Aqui
+
+ </summary></entry><entry><title type="html">Mini-curso Cake PHP Iniciantes (Em andamento)</title><link href="/video/2015/02/18/mini-curso-cakephp-parte-2-em-andamento.html" rel="alternate" type="text/html" title="Mini-curso Cake PHP Iniciantes (Em andamento)" /><published>2015-02-18T09:40:06-05:00</published><updated>2015-02-18T09:40:06-05:00</updated><id>/video/2015/02/18/mini-curso-cakephp-parte-2-em-andamento</id><content type="html" xml:base="/video/2015/02/18/mini-curso-cakephp-parte-2-em-andamento.html">&lt;p&gt;AULA 01 - INTRODUÇÃO-(Aula  Online Gravada)&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/f6dZUW9yfU8?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;AULA 02 - MODELAGEM&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/DhvhTewUWzU?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;AULA 03 - MVC&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/1SQ2gtV1y7Q?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;AULA 04 - UTILIZANDO O BAKE&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/nZabeztFn9k?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Aguardem a próxima aula…&lt;/p&gt;</content><author><name>Waldemar Neto</name></author><summary type="html">AULA 01 - INTRODUÇÃO-(Aula  Online Gravada)
+
+
+AULA 02 - MODELAGEM
+
+
+
+AULA 03 - MVC
+
+
+
+AULA 04 - UTILIZANDO O BAKE
+
+
+
+Aguardem a próxima aula…</summary></entry><entry><title type="html">Como definir o debug habilitado para o servidor local e desabilitado para a hospedagem automaticamente</title><link href="/deploy/2015/02/05/como-definir-o-debug-habilitado-para-o-servidor-local-e-desabilitado-para-a-hospedagem-automaticamente.html" rel="alternate" type="text/html" title="Como definir o debug habilitado para o servidor local e desabilitado para a hospedagem automaticamente" /><published>2015-02-05T09:40:06-05:00</published><updated>2015-02-05T09:40:06-05:00</updated><id>/deploy/2015/02/05/como-definir-o-debug-habilitado-para-o-servidor-local-e-desabilitado-para-a-hospedagem-automaticamente</id><content type="html" xml:base="/deploy/2015/02/05/como-definir-o-debug-habilitado-para-o-servidor-local-e-desabilitado-para-a-hospedagem-automaticamente.html">&lt;p&gt;Este post está destinado a pessoas que vêm me perguntando se existe uma forma de o Cake identificar automaticamente se o servidor é o de desenvolvimento ou de produção, e configurar o debug automaticamente conforme o tipo de servidor.&lt;/p&gt;
+
+&lt;p&gt;Bom, sabemos que para quem desenvolve, é imprescindível o uso do debug, mas o mesmo deve ser desativado ao público, porém algumas vezes precisamos estar constantemente alterando diretrizes no core.php (ou no app.php no caso do Cake 3.0), e se enviarmos este arquivo para o servidor de produção podemos estar sem querer habilitando o debug na produção, o que é uma falha grave. Mas podemos automatizar o processo do debug e configurá-lo conforme o servidor, para isto existem várias opções.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;1. Minha preferida, utilizar um arquivo de configuração global do PHP&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;O php.ini tem uma diretriz chamada “auto_prepend_file”, esta diretriz define que um arquivo.php será sempre adicionado ao qualquer projeto que você criar com PHP, o mesmo será SEMPRE adicionado no início de qualquer script PHP. Para proceder…&lt;/p&gt;
+&lt;ol&gt;
+	&lt;li&gt;Abra o php.ini e procure a linha &quot;auto_prepend_file&quot; e altere para &quot;auto_prepend_file=/caminho/para/global_config.php&quot; por exemplo, (C:\caminho\para\global_config.php no windows), este global_config.php pode estar em qualquer pasta.&lt;/li&gt;
+	&lt;li&gt;Crie o arquivo global_config.php na pasta definida no php.ini&lt;/li&gt;
+	&lt;li&gt;Insira o código abaixo
+&amp;lt;?PHP
+define('CAKE_DEBUG',2);
+OU... caso trabalhe com Cake 2.x e Cake 3.0 no mesmo servidor utilize:
+define('CAKE2_DEBUG,2);
+define('CAKE3_DEBUG,1);&lt;/li&gt;
+	&lt;li&gt;Reinicie o apache&lt;/li&gt;
+	&lt;li&gt;abra o arquivo core.php (no cake 2.x) procure pela linha &quot;Configure::write('debug',2);&quot; e altere para &quot;Configure::write('debug',0);&quot; e logo abaixo desta linha insira:
+if(defined('CAKE2_DEBUG')) Configure::write('debug',CAKE_DEBUG);&lt;/li&gt;
+	&lt;li&gt;No Cake 3.0 você insere no final do código:
+if(defined('CAKE3_DEBUG')) $config['debug'] = CAKE3_DEBUG;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Pronto, agora pode alterar o core.php ou app.php a vontade e enviar para o servidor de produção quando quiser que não correrá mais o risco de habilitar o debug sem querer no servidor de produção…&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;2ª opção: Utilizando o SetEvent no Apache.&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Uma outra opção é utilizar a diretriz SetEnv do Apache, assim terá a diretriz env(‘CAKE2_DEBUG’) na aplicação no servidor de desenvolvimento, e não no de produção.&lt;/p&gt;
+&lt;ol&gt;
+	&lt;li&gt;Abra o httpd.conf e insira em qualquer lugar o código:
+SetEnv CAKE2_DEBUG 2
+SetEnv CAKE3_DEBUG 1&lt;/li&gt;
+	&lt;li&gt;Salve o httpd.conf e reinicie o apache&lt;/li&gt;
+	&lt;li&gt;Abra o core.php da sua aplicação e modifique a linha &quot;Configure::write('debug',2)&quot; para 0, e logo abaixo insira:
+if(env('CAKE2_DEBUG')) Configure::write('debug',env('CAKE2_DEBUG'));&lt;/li&gt;
+	&lt;li&gt;No Cake 3.0 insira no final do app.php:
+if(env('CAKE2_DEBUG')) $config['debug'] = env('CAKE3_DEBUG');&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Existe também a possibilidade de alterar o .htaccess da sua aplicação inserindo a diretriz SetEnv, mas todo novo projeto terá que alterar o .htaccess (Lembre-se, sempre o do webroot), inserindo direto no httpd.conf você terá essas opções globais, porém toda vez que precisar alterar terá que reiniciar o apache.&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;3ª Opção: Identificando o servidor local&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Esta solução foi sugerido por um usuário do grupo do facebook, então estarei postando aqui também.&lt;/p&gt;
+&lt;ol&gt;
+	&lt;li&gt;Abra o arquivo core.php e insira as seguintes linhas:
+&lt;span class=&quot;UFICommentBody&quot;&gt;if (env('SERVER_ADDR') == '127.0.0.1' ||
+strstr(env('SERVER_NAME'), 'dev') !== false ||
+strstr(env('SERVER_NAME'), 'localhost') !== false ||
+// C0A8 stands for IPv6 Address
+strstr(env('SERVER_ADDR'), 'C0A8') !== false ||
+strstr(env('SERVER_ADDR'), '192.168') !== false
+) {
+Configure::write('debug', 2);
+} else {
+Configure::write('debug', 0);
+}&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;&lt;strong&gt;Conclusão&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;As três opções listadas aqui vão trazer um resultado satisfatório, particularmente prefiro a primeira opção, pois você pode alterar o debug através do arquivo de configuração global a qualquer momento sem a necessidade de reiniciar o apache para surtir efeito. A segunda opção é uma sugestão dos mantenedores do Cake, gosto muido desta opção também porém toda vez que precisar alterar a diretriz terá que reiniciar o apache (Exceto no caso de utilizar o .htaccess, aí não será necessário reiniciar, mas se ocorrer de sem querer enviar para produção o .htaccess, estará habilitando o debug ao público).&lt;/p&gt;</content><author><name>Andre Cavallari</name></author><summary type="html">Este post está destinado a pessoas que vêm me perguntando se existe uma forma de o Cake identificar automaticamente se o servidor é o de desenvolvimento ou de produção, e configurar o debug automaticamente conforme o tipo de servidor.
+
+Bom, sabemos que para quem desenvolve, é imprescindível o uso do debug, mas o mesmo deve ser desativado ao público, porém algumas vezes precisamos estar constantemente alterando diretrizes no core.php (ou no app.php no caso do Cake 3.0), e se enviarmos este arquivo para o servidor de produção podemos estar sem querer habilitando o debug na produção, o que é uma falha grave. Mas podemos automatizar o processo do debug e configurá-lo conforme o servidor, para isto existem várias opções.
+
+
+
+ 
+1. Minha preferida, utilizar um arquivo de configuração global do PHP
+O php.ini tem uma diretriz chamada “auto_prepend_file”, esta diretriz define que um arquivo.php será sempre adicionado ao qualquer projeto que você criar com PHP, o mesmo será SEMPRE adicionado no início de qualquer script PHP. Para proceder…
+
+	Abra o php.ini e procure a linha &quot;auto_prepend_file&quot; e altere para &quot;auto_prepend_file=/caminho/para/global_config.php&quot; por exemplo, (C:\caminho\para\global_config.php no windows), este global_config.php pode estar em qualquer pasta.
+	Crie o arquivo global_config.php na pasta definida no php.ini
+	Insira o código abaixo
+&amp;lt;?PHP
+define('CAKE_DEBUG',2);
+OU... caso trabalhe com Cake 2.x e Cake 3.0 no mesmo servidor utilize:
+define('CAKE2_DEBUG,2);
+define('CAKE3_DEBUG,1);
+	Reinicie o apache
+	abra o arquivo core.php (no cake 2.x) procure pela linha &quot;Configure::write('debug',2);&quot; e altere para &quot;Configure::write('debug',0);&quot; e logo abaixo desta linha insira:
+if(defined('CAKE2_DEBUG')) Configure::write('debug',CAKE_DEBUG);
+	No Cake 3.0 você insere no final do código:
+if(defined('CAKE3_DEBUG')) $config['debug'] = CAKE3_DEBUG;
+
+Pronto, agora pode alterar o core.php ou app.php a vontade e enviar para o servidor de produção quando quiser que não correrá mais o risco de habilitar o debug sem querer no servidor de produção…
+2ª opção: Utilizando o SetEvent no Apache.
+Uma outra opção é utilizar a diretriz SetEnv do Apache, assim terá a diretriz env(‘CAKE2_DEBUG’) na aplicação no servidor de desenvolvimento, e não no de produção.
+
+	Abra o httpd.conf e insira em qualquer lugar o código:
+SetEnv CAKE2_DEBUG 2
+SetEnv CAKE3_DEBUG 1
+	Salve o httpd.conf e reinicie o apache
+	Abra o core.php da sua aplicação e modifique a linha &quot;Configure::write('debug',2)&quot; para 0, e logo abaixo insira:
+if(env('CAKE2_DEBUG')) Configure::write('debug',env('CAKE2_DEBUG'));
+	No Cake 3.0 insira no final do app.php:
+if(env('CAKE2_DEBUG')) $config['debug'] = env('CAKE3_DEBUG');
+
+Existe também a possibilidade de alterar o .htaccess da sua aplicação inserindo a diretriz SetEnv, mas todo novo projeto terá que alterar o .htaccess (Lembre-se, sempre o do webroot), inserindo direto no httpd.conf você terá essas opções globais, porém toda vez que precisar alterar terá que reiniciar o apache.
+3ª Opção: Identificando o servidor local
+Esta solução foi sugerido por um usuário do grupo do facebook, então estarei postando aqui também.
+
+	Abra o arquivo core.php e insira as seguintes linhas:
+if (env('SERVER_ADDR') == '127.0.0.1' ||
+strstr(env('SERVER_NAME'), 'dev') !== false ||
+strstr(env('SERVER_NAME'), 'localhost') !== false ||
+// C0A8 stands for IPv6 Address
+strstr(env('SERVER_ADDR'), 'C0A8') !== false ||
+strstr(env('SERVER_ADDR'), '192.168') !== false
+) {
+Configure::write('debug', 2);
+} else {
+Configure::write('debug', 0);
+}
+
+Conclusão
+As três opções listadas aqui vão trazer um resultado satisfatório, particularmente prefiro a primeira opção, pois você pode alterar o debug através do arquivo de configuração global a qualquer momento sem a necessidade de reiniciar o apache para surtir efeito. A segunda opção é uma sugestão dos mantenedores do Cake, gosto muido desta opção também porém toda vez que precisar alterar a diretriz terá que reiniciar o apache (Exceto no caso de utilizar o .htaccess, aí não será necessário reiniciar, mas se ocorrer de sem querer enviar para produção o .htaccess, estará habilitando o debug ao público).</summary></entry><entry><title type="html">Cakegallery do Hugo Dias!</title><link href="/plugins/2015/01/30/cakegallery-do-hugo-dias.html" rel="alternate" type="text/html" title="Cakegallery do Hugo Dias!" /><published>2015-01-30T09:40:06-05:00</published><updated>2015-01-30T09:40:06-05:00</updated><id>/plugins/2015/01/30/cakegallery-do-hugo-dias</id><content type="html" xml:base="/plugins/2015/01/30/cakegallery-do-hugo-dias.html">&lt;p&gt;Vocês sabiam que, além do &lt;a href=&quot;https://www.facebook.com/groups/cakebrasil/&quot; target=&quot;_blank&quot;&gt;CakePHP Brasil no Facebook,&lt;/a&gt; no Google+ tem uma comunidade do&lt;a href=&quot;https://plus.google.com/communities/101232071259098508722&quot; target=&quot;_blank&quot;&gt; CakePHP Brasil&lt;/a&gt;? Pois é, ela foi criada pelo Hugo Dias, um camarada super gente boa com quem já troquei algumas palavras uma ou duas vezes.&lt;/p&gt;
+
+&lt;p&gt;Ele criou um upload de imagens para cake super show de bola, então fica a dica pra vocês.&lt;/p&gt;
+
+&lt;h3&gt;Apresentação do projeto&lt;/h3&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/AhU16ji_i9g?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;h3&gt;Tutorial de instalação&lt;/h3&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/OEgVQQTaWkE?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;h3&gt;Como usar a ferramenta&lt;/h3&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/kxKRSY4Tdjc?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;h3&gt;Utilizando os Helpers&lt;/h3&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/nKnjlPbMj-g?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Bons estudos :D&lt;/p&gt;</content><author><name>Erik Figueiredo</name></author><summary type="html">Vocês sabiam que, além do CakePHP Brasil no Facebook, no Google+ tem uma comunidade do CakePHP Brasil? Pois é, ela foi criada pelo Hugo Dias, um camarada super gente boa com quem já troquei algumas palavras uma ou duas vezes.
+
+Ele criou um upload de imagens para cake super show de bola, então fica a dica pra vocês.
+
+Apresentação do projeto
+
+
+
+Tutorial de instalação
+
+
+
+Como usar a ferramenta
+
+
+
+Utilizando os Helpers
+
+
+
+Bons estudos :D</summary></entry><entry><title type="html">Mini curso CakePHP parte 1 , geração de código utilizando o bake e estrutura!</title><link href="/video/2015/01/08/mini-curso-cakephp-parte-1-geracao-de-codigo-utilizando-o-bake-e-estrutura.html" rel="alternate" type="text/html" title="Mini curso CakePHP parte 1 , geração de código utilizando o bake e estrutura!" /><published>2015-01-08T07:52:06-05:00</published><updated>2015-01-08T07:52:06-05:00</updated><id>/video/2015/01/08/mini-curso-cakephp-parte-1-geracao-de-codigo-utilizando-o-bake-e-estrutura</id><content type="html" xml:base="/video/2015/01/08/mini-curso-cakephp-parte-1-geracao-de-codigo-utilizando-o-bake-e-estrutura.html">&lt;p&gt;Ola pessoal, a o longo de 5 videos vamos conhecer o básico/intermediário sobre o framework CakePHP, o suficiente para criar aplicação de diversos tipos e tamanhos.&lt;/p&gt;
+
+&lt;p&gt;Nestes tutoriais eu tento usar o mais comum de vermos no mercado, no dia a dia de trabalho.&lt;/p&gt;
+
+&lt;p&gt;Espero que gostem das video aulas, e me sigam la no Youtube.
+Um grande abraço.&lt;/p&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;420&quot; src=&quot;http://www.youtube.com/embed/QtP3y8dvKQQ?color=white&amp;amp;theme=light&quot; style=&quot;border: none&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;O código que eu fiz neste tutorial esta no meu GitHub &lt;a title=&quot;https://github.com/waldemarnt/tutorial-cakephp/tree/fase1&quot; href=&quot;https://github.com/waldemarnt/tutorial-cakephp/tree/fase1&quot; target=&quot;_blank&quot;&gt;https://github.com/waldemarnt/tutorial-cakephp/tree/fase1&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Até a próxima parte, onde iremos ver os padrões de views, imports, e mais um pouco de estrutura.&lt;/p&gt;</content><author><name>Waldemar Neto</name></author><summary type="html">Ola pessoal, a o longo de 5 videos vamos conhecer o básico/intermediário sobre o framework CakePHP, o suficiente para criar aplicação de diversos tipos e tamanhos.
+
+Nestes tutoriais eu tento usar o mais comum de vermos no mercado, no dia a dia de trabalho.
+
+Espero que gostem das video aulas, e me sigam la no Youtube.
+Um grande abraço.
+
+
+
+O código que eu fiz neste tutorial esta no meu GitHub https://github.com/waldemarnt/tutorial-cakephp/tree/fase1
+
+Até a próxima parte, onde iremos ver os padrões de views, imports, e mais um pouco de estrutura.</summary></entry><entry><title type="html">Instalando e configurando o CakePHP!</title><link href="/basico/2015/01/07/instalando-e-configurando-o-cakephp.html" rel="alternate" type="text/html" title="Instalando e configurando o CakePHP!" /><published>2015-01-07T16:46:06-05:00</published><updated>2015-01-07T16:46:06-05:00</updated><id>/basico/2015/01/07/instalando-e-configurando-o-cakephp</id><content type="html" xml:base="/basico/2015/01/07/instalando-e-configurando-o-cakephp.html">&lt;p&gt;Meu primeiro artigo aqui no CakePHP Brasil é dedicado a todos os que querem iniciar no Framework, bem vindo a série Curso de Introdução ao CakePHP.&lt;/p&gt;
+
+&lt;p&gt;Nesta série abordaremos as duas versões mais rescentes do CakePHP, a 2 e a 3, pra isso sempre vou começar com uma introdução geral e partir para o Cake 2, na sequência eu repito o processo para o CakePHP 3.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Para este curso vamos precisar de um banco de dados, vou usar MySql e o meu banco vai chamar tutorial_cakephpbrasil.&lt;/p&gt;
+
+&lt;p&gt;Vamos lá?&lt;/p&gt;
+&lt;h3&gt;Instalando o CakePHP 2&lt;/h3&gt;
+&lt;p&gt;Pra começar, vá ao site oficial do CakePHP (&lt;a href=&quot;http://cakephp.org/&quot; target=&quot;_blank&quot;&gt;www.cakephp.org&lt;/a&gt;), do lado direto tem um Download vermelho bem grande, com a versão mais rescente, se neste ponto você encontrar a 3.* (* = a qualquer coisa, 3.1.2 por exemplo), então vá direto ao repositório no GitHub para baixar a versão 2 (&lt;a href=&quot;https://github.com/cakephp/cakephp/tags&quot; target=&quot;_blank&quot;&gt;neste link&lt;/a&gt;), é só rolar pra encontrar a versão 2.* mais rescente.&lt;/p&gt;
+
+&lt;p&gt;Com o arquivo compactado em mãos… bem, desnecessário, mas lá vai, rsrsrsrs: descompacte dentro do diretório do seu servidor web local (htdocs, www…).&lt;/p&gt;
+
+&lt;p&gt;Verifique se o diretório em app/tmp tem permissão de leitura e escrita (777) recursivamente (nele próprio e em todos os outros diretórios e arquivos dentro dele).&lt;/p&gt;
+
+&lt;p&gt;Agora abra o diretório do CakePHP no seu navegador pra ver se está tudo certo, se uma tela com alguns avisos em vermelho, verde e amarelo aparecer é porque deu tudo certo.&lt;/p&gt;
+
+&lt;p&gt;Vamos resolver estes alertas e deixar tudo verdinho?&lt;/p&gt;
+&lt;h3&gt;Configurar o CakePHP 2&lt;/h3&gt;
+&lt;p&gt;Cada cor é uma prioridade, vamos começar pelos vermelhos. Tem duas configurações de segurança que precisamos resolver, é o Security.Salt e o Security.CypherSeed, acesse o arquivo em app/Config/core.php e localize as linhas que começam como o exemplo abaixo:&lt;/p&gt;
+&lt;pre&gt;Configure::write('Security.salt',...
+&lt;/pre&gt;
+&lt;pre&gt;Configure::write('Security.cipherSeed',...
+&lt;/pre&gt;
+&lt;p&gt;Pronto, os vermelhinhos estão resolvidos, se tiver mais algum no seu me avisa nos comentários ou no forum.&lt;/p&gt;
+
+&lt;p&gt;Pra fechar, vamos acertar um amarelinho, o do Banco de dados.&lt;/p&gt;
+
+&lt;p&gt;Vá ao diretório app/Config e renomeie o arquivo database.php.default para database.php.&lt;/p&gt;
+
+&lt;p&gt;Abra ele e acerte as configurações de acesso do array $default para as do seu banco de dados:&lt;/p&gt;
+&lt;pre&gt;public $default = array(
+'datasource' =&amp;gt; 'Database/Mysql',
+'host' =&amp;gt; 'localhost',
+'port' =&amp;gt; '',
+'login' =&amp;gt; 'root',
+'password' =&amp;gt; '',
+'database' =&amp;gt; 'tutorial_cakephpbrasil',
+'prefix' =&amp;gt; '',
+'encoding' =&amp;gt; 'utf8'
+);&lt;/pre&gt;
+&lt;p&gt;Quando você abrir o navegador deve encontrar o aviso do banco (antes amarelo) na cor verde, se não estiver confira todos os dados de conexão e poste nos comentários ou no forum, para conferir, você deve acaba com apenas uma mensagem amarela, vamos ignorar isso.&lt;/p&gt;
+
+&lt;p&gt;Parabéns, o CakePHP 2 está configurado.&lt;/p&gt;
+&lt;h3&gt;Instalando o CakePHP 3&lt;/h3&gt;
+&lt;p&gt;O CakePHP já tem um conceito muito mais moderno, então vamos aproveitar isso, pra começar garanta que você já tem o Composer acessando o site e baixando no diretório que quer instalar o CakePHP 3 (se não conhece o Composer não sabe o que está perdendo).&lt;/p&gt;
+
+&lt;p&gt;Não vou me aprofundar no assunto, lá tem opção para baixar via linha de comando (usando PHP ou Curl), link direto (Manual Download) e até um instalador pra Windows.&lt;/p&gt;
+
+&lt;p&gt;Note que você pode acabar com o composer instalado globalmente (com o instalador do Windows por exemplo) ou com ele no diretório local.&lt;/p&gt;
+
+&lt;p&gt;Abra a linha comando e garanta que o php roda na linha de comando com php -v, ele deve mostrar a versão do PHP.&lt;/p&gt;
+
+&lt;p&gt;Pra instalar o CakePHP execute o comando abaixo:&lt;/p&gt;
+&lt;pre&gt;php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]&lt;/pre&gt;
+&lt;p&gt;Para instalação local do composer&lt;/p&gt;
+&lt;pre&gt;composer create-project --prefer-dist -s dev cakephp/app [app_name]&lt;/pre&gt;
+&lt;p&gt;Para instalação global do composer&lt;/p&gt;
+
+&lt;p&gt;Substitua o [app_name] pelo nome do diretório que ele vai criar.&lt;/p&gt;
+
+&lt;p&gt;No fim verifique se os diretórios logs e tmp tem permissão de escrita e leitura (777).&lt;/p&gt;
+&lt;h3&gt;Configurar o CakePHP 3&lt;/h3&gt;
+&lt;p&gt;O Composer já configura o Security.Salt sozinho (o Security.CypherSeed não existe mais), falta agora configurar o banco de dados.&lt;/p&gt;
+
+&lt;p&gt;Localize o arquivo config/app.php e dentro dele a entrada Datasources no array $config:&lt;/p&gt;
+&lt;pre&gt;config = [
+    // More configuration above.
+    'Datasources' =&amp;gt; [
+        'default' =&amp;gt; [
+            'className' =&amp;gt; 'Cake\Database\Connection',
+            'driver' =&amp;gt; 'Cake\Database\Driver\Mysql',
+            'persistent' =&amp;gt; false,
+            'host' =&amp;gt; 'localhost',
+            'username' =&amp;gt; 'root',
+            'password' =&amp;gt; '',
+            'database' =&amp;gt; 'tutorial_cakephpbrasil',
+            'encoding' =&amp;gt; 'utf8',
+            'timezone' =&amp;gt; 'UTC'
+        ],
+    ],
+];
+&lt;/pre&gt;
+&lt;p&gt;Pronto, o CakePHP 3 já está configurado.&lt;/p&gt;
+&lt;h3&gt;Conclusão&lt;/h3&gt;
+&lt;p&gt;Com o CakePHP já configurado, vamos partir pro próximo artigo, que vai mostrar a criação da nossa primeira aplicação, um gerenciador de usuários.&lt;/p&gt;</content><author><name>Erik Figueiredo</name></author><summary type="html">Meu primeiro artigo aqui no CakePHP Brasil é dedicado a todos os que querem iniciar no Framework, bem vindo a série Curso de Introdução ao CakePHP.
+
+Nesta série abordaremos as duas versões mais rescentes do CakePHP, a 2 e a 3, pra isso sempre vou começar com uma introdução geral e partir para o Cake 2, na sequência eu repito o processo para o CakePHP 3.
+
+Para este curso vamos precisar de um banco de dados, vou usar MySql e o meu banco vai chamar tutorial_cakephpbrasil.
+
+Vamos lá?
+Instalando o CakePHP 2
+Pra começar, vá ao site oficial do CakePHP (www.cakephp.org), do lado direto tem um Download vermelho bem grande, com a versão mais rescente, se neste ponto você encontrar a 3.* (* = a qualquer coisa, 3.1.2 por exemplo), então vá direto ao repositório no GitHub para baixar a versão 2 (neste link), é só rolar pra encontrar a versão 2.* mais rescente.
+
+Com o arquivo compactado em mãos… bem, desnecessário, mas lá vai, rsrsrsrs: descompacte dentro do diretório do seu servidor web local (htdocs, www…).
+
+Verifique se o diretório em app/tmp tem permissão de leitura e escrita (777) recursivamente (nele próprio e em todos os outros diretórios e arquivos dentro dele).
+
+Agora abra o diretório do CakePHP no seu navegador pra ver se está tudo certo, se uma tela com alguns avisos em vermelho, verde e amarelo aparecer é porque deu tudo certo.
+
+Vamos resolver estes alertas e deixar tudo verdinho?
+Configurar o CakePHP 2
+Cada cor é uma prioridade, vamos começar pelos vermelhos. Tem duas configurações de segurança que precisamos resolver, é o Security.Salt e o Security.CypherSeed, acesse o arquivo em app/Config/core.php e localize as linhas que começam como o exemplo abaixo:
+Configure::write('Security.salt',...
+
+Configure::write('Security.cipherSeed',...
+
+Pronto, os vermelhinhos estão resolvidos, se tiver mais algum no seu me avisa nos comentários ou no forum.
+
+Pra fechar, vamos acertar um amarelinho, o do Banco de dados.
+
+Vá ao diretório app/Config e renomeie o arquivo database.php.default para database.php.
+
+Abra ele e acerte as configurações de acesso do array $default para as do seu banco de dados:
+public $default = array(
+'datasource' =&amp;gt; 'Database/Mysql',
+'host' =&amp;gt; 'localhost',
+'port' =&amp;gt; '',
+'login' =&amp;gt; 'root',
+'password' =&amp;gt; '',
+'database' =&amp;gt; 'tutorial_cakephpbrasil',
+'prefix' =&amp;gt; '',
+'encoding' =&amp;gt; 'utf8'
+);
+Quando você abrir o navegador deve encontrar o aviso do banco (antes amarelo) na cor verde, se não estiver confira todos os dados de conexão e poste nos comentários ou no forum, para conferir, você deve acaba com apenas uma mensagem amarela, vamos ignorar isso.
+
+Parabéns, o CakePHP 2 está configurado.
+Instalando o CakePHP 3
+O CakePHP já tem um conceito muito mais moderno, então vamos aproveitar isso, pra começar garanta que você já tem o Composer acessando o site e baixando no diretório que quer instalar o CakePHP 3 (se não conhece o Composer não sabe o que está perdendo).
+
+Não vou me aprofundar no assunto, lá tem opção para baixar via linha de comando (usando PHP ou Curl), link direto (Manual Download) e até um instalador pra Windows.
+
+Note que você pode acabar com o composer instalado globalmente (com o instalador do Windows por exemplo) ou com ele no diretório local.
+
+Abra a linha comando e garanta que o php roda na linha de comando com php -v, ele deve mostrar a versão do PHP.
+
+Pra instalar o CakePHP execute o comando abaixo:
+php composer.phar create-project --prefer-dist -s dev cakephp/app [app_name]
+Para instalação local do composer
+composer create-project --prefer-dist -s dev cakephp/app [app_name]
+Para instalação global do composer
+
+Substitua o [app_name] pelo nome do diretório que ele vai criar.
+
+No fim verifique se os diretórios logs e tmp tem permissão de escrita e leitura (777).
+Configurar o CakePHP 3
+O Composer já configura o Security.Salt sozinho (o Security.CypherSeed não existe mais), falta agora configurar o banco de dados.
+
+Localize o arquivo config/app.php e dentro dele a entrada Datasources no array $config:
+config = [
+    // More configuration above.
+    'Datasources' =&amp;gt; [
+        'default' =&amp;gt; [
+            'className' =&amp;gt; 'Cake\Database\Connection',
+            'driver' =&amp;gt; 'Cake\Database\Driver\Mysql',
+            'persistent' =&amp;gt; false,
+            'host' =&amp;gt; 'localhost',
+            'username' =&amp;gt; 'root',
+            'password' =&amp;gt; '',
+            'database' =&amp;gt; 'tutorial_cakephpbrasil',
+            'encoding' =&amp;gt; 'utf8',
+            'timezone' =&amp;gt; 'UTC'
+        ],
+    ],
+];
+
+Pronto, o CakePHP 3 já está configurado.
+Conclusão
+Com o CakePHP já configurado, vamos partir pro próximo artigo, que vai mostrar a criação da nossa primeira aplicação, um gerenciador de usuários.</summary></entry><entry><title type="html">Como configurar o Cake Bake no Mac OS X!</title><link href="/bake/mac/2013/12/30/como-configurar-o-cake-bake-no-mac-os-x.html" rel="alternate" type="text/html" title="Como configurar o Cake Bake no Mac OS X!" /><published>2013-12-30T14:02:06-05:00</published><updated>2013-12-30T14:02:06-05:00</updated><id>/bake/mac/2013/12/30/como-configurar-o-cake-bake-no-mac-os-x</id><content type="html" xml:base="/bake/mac/2013/12/30/como-configurar-o-cake-bake-no-mac-os-x.html">&lt;p&gt;Quem está iniciando o desenvolvimento com CakePHP já deve ter ouvido muito falar do comando “cake baker” então vamos esclarecer como configurar esse comando para funcionar no seu terminal, caso você use Max OS X (Mavericks).&lt;/p&gt;
+
+&lt;p&gt;É uma tarefa muito simples que porém vai te ajudar muito na hora de desenvolver a base da sua aplicação, ou pelos menos vai ajudar muito na criação das tarefas mais básicas e você não vai precisar o código das funções toda vez que precisar criar uma aplicação nova. Economia de tempo é a palavra chave para o cake bake.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;No Mac OSX cada usuário tem o seu próprio perfil no sistema e dentro do perfil temos um arquivo chamado: .profile
+Esse arquivo é um arquivo de sistema e não pode ser visualizado pelo Finder como se fosse um arquivo qualquer.&lt;/p&gt;
+
+&lt;p&gt;Neste exemplo vou usar o editor &lt;a href=&quot;https://panic.com/coda/&quot; target=&quot;_blank&quot;&gt;Coda&lt;/a&gt; para facilitar nossa vida.&lt;/p&gt;
+
+&lt;p&gt;Então vamos lá… mãos à obra.&lt;/p&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;Com o editor aberto, navegue até a pasta raiz do seu usuário, se você só conseguir visualizar pastas e nenhum arquivo, verifique nas opções &quot;View&quot; e habilite a função &quot;Show Invisible File&quot;. Pronto, agora você vai visualizar todos os arquivos dentro da pasta do seu perfil.&lt;/li&gt;
+    &lt;li&gt;Localize o arquivo .profile e abra esse arquivo. Cuidado para não excluir informações já existentes no seu arquivo.&lt;/li&gt;
+    &lt;li&gt;Dentro do arquivo você precisa informar o caminho de instalação do PHP e o caminho da sua instalação do CakePHP.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note que é uma única linha, com todas as informações separadas apenas por : (dois pontos), você não precisa separar essa configuração em várias linhas.&lt;/p&gt;
+
+&lt;pre&gt;export PATH=/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.5.10/bin:/Users/Rey/Sites/&lt;em&gt;cakephp&lt;/em&gt;/app/Console:/opt/local/bin:/opt/local/sbin:$PATH&lt;/pre&gt;
+
+&lt;p&gt;Observe que eu informei:&lt;/p&gt;
+
+&lt;pre&gt;/Applications/MAMP/bin/php/php5.5.10/bin&lt;/pre&gt;
+
+&lt;p&gt;e&lt;/p&gt;
+
+&lt;pre&gt;/Users/Rey/Sites/&lt;em&gt;cakephp&lt;/em&gt;/app/Console&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;cakephp&lt;/em&gt; é o diretório da minha aplicação&lt;/p&gt;
+
+&lt;p&gt;São os dois caminhos fundamentais para o Cake Bake funcionar.&lt;/p&gt;
+
+&lt;p&gt;Quando você concluir as alterações salve o arquivo, feche o editor de texto e feche também todas as janelas de terminal que você estiver usando naquele momento, pois as alterações só serão válidas depois que o Terminal for reaberto.&lt;/p&gt;
+
+&lt;p&gt;Neste exemplo estou passando as informações para quem usa o OS X e o MAMP Pro, mas existe também a versão &lt;a href=&quot;http://www.mamp.info/&quot; target=&quot;_blank&quot;&gt;MAMP&lt;/a&gt; que é gratuita para quem não quer pagar pela versão PRO do aplicativo.&lt;/p&gt;</content><author><name>Reinaldo Ferro</name></author><summary type="html">Quem está iniciando o desenvolvimento com CakePHP já deve ter ouvido muito falar do comando “cake baker” então vamos esclarecer como configurar esse comando para funcionar no seu terminal, caso você use Max OS X (Mavericks).
+
+É uma tarefa muito simples que porém vai te ajudar muito na hora de desenvolver a base da sua aplicação, ou pelos menos vai ajudar muito na criação das tarefas mais básicas e você não vai precisar o código das funções toda vez que precisar criar uma aplicação nova. Economia de tempo é a palavra chave para o cake bake.
+
+No Mac OSX cada usuário tem o seu próprio perfil no sistema e dentro do perfil temos um arquivo chamado: .profile
+Esse arquivo é um arquivo de sistema e não pode ser visualizado pelo Finder como se fosse um arquivo qualquer.
+
+Neste exemplo vou usar o editor Coda para facilitar nossa vida.
+
+Então vamos lá… mãos à obra.
+
+
+    Com o editor aberto, navegue até a pasta raiz do seu usuário, se você só conseguir visualizar pastas e nenhum arquivo, verifique nas opções &quot;View&quot; e habilite a função &quot;Show Invisible File&quot;. Pronto, agora você vai visualizar todos os arquivos dentro da pasta do seu perfil.
+    Localize o arquivo .profile e abra esse arquivo. Cuidado para não excluir informações já existentes no seu arquivo.
+    Dentro do arquivo você precisa informar o caminho de instalação do PHP e o caminho da sua instalação do CakePHP.
+
+
+Note que é uma única linha, com todas as informações separadas apenas por : (dois pontos), você não precisa separar essa configuração em várias linhas.
+
+export PATH=/Applications/MAMP/Library/bin:/Applications/MAMP/bin/php/php5.5.10/bin:/Users/Rey/Sites/cakephp/app/Console:/opt/local/bin:/opt/local/sbin:$PATH
+
+Observe que eu informei:
+
+/Applications/MAMP/bin/php/php5.5.10/bin
+
+e
+
+/Users/Rey/Sites/cakephp/app/Console
+
+cakephp é o diretório da minha aplicação
+
+São os dois caminhos fundamentais para o Cake Bake funcionar.
+
+Quando você concluir as alterações salve o arquivo, feche o editor de texto e feche também todas as janelas de terminal que você estiver usando naquele momento, pois as alterações só serão válidas depois que o Terminal for reaberto.
+
+Neste exemplo estou passando as informações para quem usa o OS X e o MAMP Pro, mas existe também a versão MAMP que é gratuita para quem não quer pagar pela versão PRO do aplicativo.</summary></entry></feed>
