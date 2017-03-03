@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Reconectar o MySQL manualmente no CakePHP 3</title>
+  <meta name="description" content="O Erro Desenvolvemos um sistema para gerar relatórios em algumas partes de nossa aplicação. O processo estava rodando com uma longa execução via terminal(she...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="/dicas/2017/03/02/reconectar-o-mysql-manualmente-no-cakephp-3.html">
+  <link rel="alternate" type="application/rss+xml" title="CakePHP Brasil" href="/feed.xml">
+  
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">CakePHP Brasil</a>
+
+    <nav class="site-nav">
+      <span class="menu-icon">
+        <svg viewBox="0 0 18 15" width="18px" height="15px">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </span>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/sobre/">Sobre</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class='post'>
+  <h1 class='post-title'>Reconectar o MySQL manualmente no CakePHP 3</h1>
+  <div class="post-date"><p>Mar 2, 2017</p></div>
+  <h2 id="o-erro">O Erro</h2>
+<p>Desenvolvemos um sistema para gerar relatórios em algumas partes de nossa aplicação. O processo estava rodando com uma longa execução via terminal(shell CakePHP). Tivemos problemas estranhos após a implantação da fila para o servidor de produção. Algumas rotinas foram processadas perfeitamente no início, mas depois de um dia, todos os trabalhos de relatório falharam. Se nós reiniciar-mos a fila, eles voltam a funcionar normalmente, e então depois de um dia voltam a falhar.</p>
+
+<p>No arquivo de log, encontramos algumas mensagens de erro como essa abaixo:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Exception: SQLState[HY000]: General error: 2006 MySQL server has
+ gone away <span class="k">in</span> <span class="o">[</span>xxx/vendor/cakephp/cakephp/src/Database
+/Statement/MysqlStatement.php line 36]
+</code></pre>
+</div>
+<p>O erro acima indica que tem algo a ver com a parte do banco de dados do nosso sistema.</p>
+
+<h2 id="primeira-tentativa">Primeira tentativa</h2>
+
+<p>Como você deve ter imaginado, nossa primeira tentativa é tentar encontrar respostas no Google. Todos os links na primeira página do Google nos dizem que precisamos aumentar os valores para <strong>max_allowed_packet</strong> e <strong>wait_timeout</strong>.</p>
+
+<p>No entanto, nada funcionou após a atualização desses valores.</p>
+
+<h2 id="solução">Solução</h2>
+
+<p>Passamos dias tentando encontrar a causa do problema. Tínhamos a certeza que seria algo relacionado com a ligação com a base de dados. Nós não tivemos nenhuma idéia do que poderia estar ocasionando isso, até que nós lemos o código fonte do CakePHP 3. Há um ingresso no repositório do CakePHP 3 indicando que ele não reconecta automaticamente no MySQL se ele falhar <a href="https://github.com/cakephp/cakephp/issues/3423">https://github.com/cakephp/cakephp/issues/3423</a>.</p>
+
+<p>Finalmente percebemos a causa:</p>
+
+<p>Uma vez que iniciamos nosso shell no CakePHP, ele usa uma única instãncia da conexão com o banco de dados até que o processo seja encerrado. Nosso processo de execução de shell do CakePHP é longo, e, uma vez que é iniciado, ele nunca será desligado de propósito. Se nenhum processo for enviado, a conexão MySQL se manterá aberta e permanecerá ociosa. Quando isso é maior que o <strong>wait_timeout</strong>, a exceção é lançada.</p>
+
+<p>Podemos ajustar a configuração do <strong>wait_timeout</strong>. Mas não podemos configurá-lo para ficar para sempre. Precisamos de uma solução melhor.</p>
+
+<p>A solução é re-conectar MySQL se uma exceção é lançada. Para fazer isso, podemos simplesmente adicionar apenas três linhas como mostrado abaixo:</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">Cake\Datasource\ConnectionManager</span><span class="p">;</span>
+
+<span class="nv">$connection</span> <span class="o">=</span> <span class="nx">ConnectionManager</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">'default'</span><span class="p">);</span>
+<span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">disconnect</span><span class="p">();</span>
+<span class="nv">$connection</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<p>Documentação: <a href="https://book.cakephp.org/3.0/en/orm/database-basics.html#database-basics">https://book.cakephp.org/3.0/en/orm/database-basics.html#database-basics</a></p>
+
+<h2 id="conclusão">Conclusão</h2>
+
+<p>Esperemos que este tutorial simples ajude você com o seu desenvolvimento, essa é uma dica bem básica mas que pode salvar vidas (risos).</p>
+
+<p>Se você tiver dúvidas ou encontrar nossos erros no tutorial acima, deixe um comentário abaixo para nos informar.</p>
+
+<p>Post originalmente publicado em <a href="https://www.startutorial.com/articles/view/manually-reconnect-mysql-in-cakephp-3">outro blog</a>, fizemos apenas a tradução e adaptamos algumas coisas para melhor entendimento.</p>
+
+<p>Caso tenha ficado alguma dúvida, ou tenha outra solução, fique a vontade para deixar seu comentário, ou criar um PR com seu artigo, tenho certeza que a comunidade agradece.</p>
+
+</article>
+
+<div>
+    <p>
+        Flaviano Honorato<br>
+        <a href="http://flaviano.com.br">http://flaviano.com.br</a>
+    </p>
+</div>
+
+<hr>
+<p><small>Quer melhorar este artigo? Vá até o <a href="https://github.com/CakePHPBrasil/blog">repositório deste blog</a></small></p>
+
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//cakephpbrasil.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">CakePHP Brasil</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              CakePHP Brasil
+            
+            </li>
+            
+            <li><a href="mailto:https://telegram.me/cakephpbr">https://telegram.me/cakephpbr</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/CakePHPBrasil"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">CakePHPBrasil</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

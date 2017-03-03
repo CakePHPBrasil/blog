@@ -1,5 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-03-02T15:20:44-05:00</updated><id>//</id><title type="html">CakePHP Brasil</title><subtitle>CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido.
-</subtitle><entry><title type="html">CakePHP - Rotas - Transformar /users em /usuarios</title><link href="/rotas/2017/03/02/rotas-transformar-users-em-usuarios.html" rel="alternate" type="text/html" title="CakePHP - Rotas - Transformar /users em /usuarios" /><published>2017-03-02T12:05:00-05:00</published><updated>2017-03-02T12:05:00-05:00</updated><id>/rotas/2017/03/02/rotas-transformar-users-em-usuarios</id><content type="html" xml:base="/rotas/2017/03/02/rotas-transformar-users-em-usuarios.html">&lt;h2 id=&quot;documentação&quot;&gt;Documentação&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2017-03-02T19:44:35-05:00</updated><id>//</id><title type="html">CakePHP Brasil</title><subtitle>CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido.
+</subtitle><entry><title type="html">Reconectar o MySQL manualmente no CakePHP 3</title><link href="/dicas/2017/03/02/reconectar-o-mysql-manualmente-no-cakephp-3.html" rel="alternate" type="text/html" title="Reconectar o MySQL manualmente no CakePHP 3" /><published>2017-03-02T16:40:00-05:00</published><updated>2017-03-02T16:40:00-05:00</updated><id>/dicas/2017/03/02/reconectar-o-mysql-manualmente-no-cakephp-3</id><content type="html" xml:base="/dicas/2017/03/02/reconectar-o-mysql-manualmente-no-cakephp-3.html">&lt;h2 id=&quot;o-erro&quot;&gt;O Erro&lt;/h2&gt;
+&lt;p&gt;Desenvolvemos um sistema para gerar relatórios em algumas partes de nossa aplicação. O processo estava rodando com uma longa execução via terminal(shell CakePHP). Tivemos problemas estranhos após a implantação da fila para o servidor de produção. Algumas rotinas foram processadas perfeitamente no início, mas depois de um dia, todos os trabalhos de relatório falharam. Se nós reiniciar-mos a fila, eles voltam a funcionar normalmente, e então depois de um dia voltam a falhar.&lt;/p&gt;
+
+&lt;p&gt;No arquivo de log, encontramos algumas mensagens de erro como essa abaixo:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Exception: SQLState[HY000]: General error: 2006 MySQL server has
+ gone away &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;xxx/vendor/cakephp/cakephp/src/Database
+/Statement/MysqlStatement.php line 36]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;O erro acima indica que tem algo a ver com a parte do banco de dados do nosso sistema.&lt;/p&gt;
+
+&lt;h2 id=&quot;primeira-tentativa&quot;&gt;Primeira tentativa&lt;/h2&gt;
+
+&lt;p&gt;Como você deve ter imaginado, nossa primeira tentativa é tentar encontrar respostas no Google. Todos os links na primeira página do Google nos dizem que precisamos aumentar os valores para &lt;strong&gt;max_allowed_packet&lt;/strong&gt; e &lt;strong&gt;wait_timeout&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;No entanto, nada funcionou após a atualização desses valores.&lt;/p&gt;
+
+&lt;h2 id=&quot;solução&quot;&gt;Solução&lt;/h2&gt;
+
+&lt;p&gt;Passamos dias tentando encontrar a causa do problema. Tínhamos a certeza que seria algo relacionado com a ligação com a base de dados. Nós não tivemos nenhuma idéia do que poderia estar ocasionando isso, até que nós lemos o código fonte do CakePHP 3. Há um ingresso no repositório do CakePHP 3 indicando que ele não reconecta automaticamente no MySQL se ele falhar &lt;a href=&quot;https://github.com/cakephp/cakephp/issues/3423&quot;&gt;https://github.com/cakephp/cakephp/issues/3423&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finalmente percebemos a causa:&lt;/p&gt;
+
+&lt;p&gt;Uma vez que iniciamos nosso shell no CakePHP, ele usa uma única instãncia da conexão com o banco de dados até que o processo seja encerrado. Nosso processo de execução de shell do CakePHP é longo, e, uma vez que é iniciado, ele nunca será desligado de propósito. Se nenhum processo for enviado, a conexão MySQL se manterá aberta e permanecerá ociosa. Quando isso é maior que o &lt;strong&gt;wait_timeout&lt;/strong&gt;, a exceção é lançada.&lt;/p&gt;
+
+&lt;p&gt;Podemos ajustar a configuração do &lt;strong&gt;wait_timeout&lt;/strong&gt;. Mas não podemos configurá-lo para ficar para sempre. Precisamos de uma solução melhor.&lt;/p&gt;
+
+&lt;p&gt;A solução é re-conectar MySQL se uma exceção é lançada. Para fazer isso, podemos simplesmente adicionar apenas três linhas como mostrado abaixo:&lt;/p&gt;
+
+&lt;div class=&quot;language-php highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;use&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Cake\Datasource\ConnectionManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$connection&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ConnectionManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$connection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;disconnect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$connection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Documentação: &lt;a href=&quot;https://book.cakephp.org/3.0/en/orm/database-basics.html#database-basics&quot;&gt;https://book.cakephp.org/3.0/en/orm/database-basics.html#database-basics&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusão&quot;&gt;Conclusão&lt;/h2&gt;
+
+&lt;p&gt;Esperemos que este tutorial simples ajude você com o seu desenvolvimento, essa é uma dica bem básica mas que pode salvar vidas (risos).&lt;/p&gt;
+
+&lt;p&gt;Se você tiver dúvidas ou encontrar nossos erros no tutorial acima, deixe um comentário abaixo para nos informar.&lt;/p&gt;
+
+&lt;p&gt;Post originalmente publicado em &lt;a href=&quot;https://www.startutorial.com/articles/view/manually-reconnect-mysql-in-cakephp-3&quot;&gt;outro blog&lt;/a&gt;, fizemos apenas a tradução e adaptamos algumas coisas para melhor entendimento.&lt;/p&gt;
+
+&lt;p&gt;Caso tenha ficado alguma dúvida, ou tenha outra solução, fique a vontade para deixar seu comentário, ou criar um PR com seu artigo, tenho certeza que a comunidade agradece.&lt;/p&gt;</content><author><name>Flaviano Honorato</name></author><summary type="html">O Erro
+Desenvolvemos um sistema para gerar relatórios em algumas partes de nossa aplicação. O processo estava rodando com uma longa execução via terminal(shell CakePHP). Tivemos problemas estranhos após a implantação da fila para o servidor de produção. Algumas rotinas foram processadas perfeitamente no início, mas depois de um dia, todos os trabalhos de relatório falharam. Se nós reiniciar-mos a fila, eles voltam a funcionar normalmente, e então depois de um dia voltam a falhar.</summary></entry><entry><title type="html">CakePHP - Rotas - Transformar /users em /usuarios</title><link href="/rotas/2017/03/02/rotas-transformar-users-em-usuarios.html" rel="alternate" type="text/html" title="CakePHP - Rotas - Transformar /users em /usuarios" /><published>2017-03-02T12:05:00-05:00</published><updated>2017-03-02T12:05:00-05:00</updated><id>/rotas/2017/03/02/rotas-transformar-users-em-usuarios</id><content type="html" xml:base="/rotas/2017/03/02/rotas-transformar-users-em-usuarios.html">&lt;h2 id=&quot;documentação&quot;&gt;Documentação&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://book.cakephp.org/3.0/en/development/routing.html&quot;&gt;Routing&lt;/a&gt;&lt;/p&gt;
 
