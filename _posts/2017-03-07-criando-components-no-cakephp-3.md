@@ -26,6 +26,7 @@ Para executar o cake, precisamos simplesmente executar o código abaixo.
 bin/cake
 ```
 Com esse comando teremos uma saída no terminal parecido com isso:
+
 ```sh
 Welcome to CakePHP v3.3.14 Console
 ---------------------------------------------------------
@@ -145,22 +146,26 @@ class UserGeneratePassComponent extends Component
 
     public function generatePass($length = 10, $uppercase = true, $number = true, $symbol = false)
     {
-	    $lmin = 'abcdefghijklmnopqrstuvwxyz';
-		$lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$num = '1234567890';
-		$simb = '!@#$%*-';
-		$retorno = '';
-		$caracteres = '';
-		$caracteres .= $lmin;
-		if ($maiusculas) $caracteres .= $lmai;
-		if ($numeros) $caracteres .= $num;
-		if ($simbolos) $caracteres .= $simb;
-		$len = strlen($caracteres);
-		for ($n = 1; $n <= $tamanho; $n++) {
-		$rand = mt_rand(1, $len);
-		$retorno .= $caracteres[$rand-1];
-		}
-		return $retorno;
+        $lmin           = 'abcdefghijklmnopqrstuvwxyz';
+        $lmai           = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $num            = '1234567890';
+        $simb           = '!@#$%*-';
+        $return         = '';
+        $caracters      = '';
+        $caracters      .= $lmin;
+        
+        if ($uppercase) $caracters .= $lmai;
+        if ($number) $caracters .= $num;
+        if ($symbol) $caracters .= $simb;
+
+        $len = strlen($caracters);
+
+        for ($n = 1; $n <= $length; $n++) {
+             $rand = mt_rand(1, $len);
+             $return .= $caracters[$rand-1];
+        }
+        
+        return $return;
     }
 }
 
@@ -188,10 +193,12 @@ class UserController extends Controller
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-        	// Gera uma senha com 15 carecteres de números, letras e símbolos
-            if (!$user['pass']){
-                $user['pass'] = $this->UserGeneratePass->generatePass(15, true, true, true);
+        	
+            // Gera uma senha com 15 carecteres de números, letras e símbolos
+            if (!$user['password']){
+                $user['password'] = $this->UserGeneratePass->generatePass(15, true, true, true);
             }
+            
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success('Usuário adicionado com sucesso.', ['class' => 'alert alert-info']);
