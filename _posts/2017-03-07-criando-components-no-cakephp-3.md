@@ -18,7 +18,7 @@ Documentação: [https://book.cakephp.org/3.0/en/controllers/components.html#com
 
 ## Criando um Component
 
-Para nosso exemplo vamos criar um Component para criação de senhas com caracteres aleatórios. Para isso precisamos criar uma classe no diretório **src/Controller/Component/**, um nome de component seguindo a convenção DO cake seria algo como: **MinhaClasseComponent.php** que extend da classe **Component**.
+Para nosso exemplo vamos criar um Component para criação de senhas com caracteres aleatórios. Para isso precisamos criar uma classe no diretório `src/Controller/Component/`, um nome de component seguindo a convenção DO cake seria algo como: `MinhaClasseComponent.php` que extend da classe `Component`.
 Como umas das filosofias do nosso Framework favorito é facilitar o trabalho, podemos usar o PHP CLI(command line inteface) ou vulgarmente conhecido como Bake.
 
 Para executar o cake, precisamos simplesmente executar o código abaixo.
@@ -59,7 +59,7 @@ To get help on a specific command, type `cake shell_name --help`
 
 Note que o nosso shell do cake nos oferece algumas possibilidades para geraçao de código, debug, migrations e etc, a possibilidade é infinita.
 
-No nosso caso usaremos o **bake**, agora se executarmos o seguinte código: 
+No nosso caso usaremos o `bake`, agora se executarmos o seguinte código:
 ```sh
 bin/cake bake
 ```
@@ -102,7 +102,7 @@ By using `cake bake [name]` you can invoke a specific bake task.
 
 ```
 
-Note que as possibilidades aumentaram, e podemos gerar códigos para controller, models, plugins, executar inclusive consultar no próprio shell.
+Note que as possibilidades aumentaram, e podemos gerar códigos para controller, models, plugins, inclusive executar consultar no próprio shell.
 
 Finalmente vamos criar nosso component(risos), este foi uma pequena introcução ao shell do cakePHP.
 Em seu terminal execute o seguinte comando:
@@ -124,24 +124,15 @@ Note que nosso Bake já gera um arquivo de test, no para este tutorial não o ut
 
 Enfim, Nosso component foi criado, agora vamos criar o método responsãvel pela criação de senha:
 
-```php 
+```php
 <?php
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 
-/**
- * UserGeneratePass component
- */
 class UserGeneratePassComponent extends Component
 {
-
-    /**
-     * Default configuration.
-     *
-     * @var array
-     */
     protected $_defaultConfig = [];
 
     public function generatePass($length = 10, $uppercase = true, $number = true, $symbol = false)
@@ -153,7 +144,7 @@ class UserGeneratePassComponent extends Component
         $return         = '';
         $caracters      = '';
         $caracters      .= $lmin;
-        
+
         if ($uppercase) $caracters .= $lmai;
         if ($number) $caracters .= $num;
         if ($symbol) $caracters .= $simb;
@@ -164,11 +155,10 @@ class UserGeneratePassComponent extends Component
              $rand = mt_rand(1, $len);
              $return .= $caracters[$rand-1];
         }
-        
+
         return $return;
     }
 }
-
 ```
 
 
@@ -186,19 +176,16 @@ class UserController extends Controller
         $this->loadComponent('UserGeneratePass');
     }
 
-	/**
-     * ADD USER
-     */
     public function add()
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-        	
+
             // Gera uma senha com 15 carecteres de números, letras e símbolos
             if (!$user['password']){
                 $user['password'] = $this->UserGeneratePass->generatePass(15, true, true, true);
             }
-            
+
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success('Usuário adicionado com sucesso.', ['class' => 'alert alert-info']);
@@ -206,10 +193,11 @@ class UserController extends Controller
             }
             $this->Flash->error(__('Não foi possível adicionar este usuário, por favor tente novamente.'));
         }
-       
+
         $this->set('user', $user);
     }
 }
+```
 
 ## Conclusão
 
