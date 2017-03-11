@@ -54,7 +54,7 @@ Documentação: [https://book.cakephp.org/3.0/en/orm/database-basics.html#databa
 
 ## Conclusão
 
-Esperemos que este tutorial simples ajude você com o seu desenvolvimento, essa é uma dica bem básica mas que pode salvar vidas (risos).
+Esperamos que este tutorial simples ajude você com o seu desenvolvimento, essa é uma dica bem básica mas que pode salvar vidas (risos).
 
 Se você tiver dúvidas ou encontrar nossos erros no tutorial acima, deixe um comentário abaixo para nos informar.
 
