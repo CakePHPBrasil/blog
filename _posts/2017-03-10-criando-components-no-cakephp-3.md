@@ -12,16 +12,16 @@ comments: true
 
 ## O que é um Component segundo a doc do CakePHP
 
-Os componentes são pacotes de lógica que são compartilhados entre controllers. O CakePHP vem com um conjunto fantástico de componentes que você pode usar para ajudar em várias tarefas comuns. Você também pode criar seus próprios componentes. Se você achar precisa copiar e colar coisas entre controllers, você deve considerar criar seu próprio Component para conter a funcionalidade. A criação de Components mantém o código dos controllers mais limpos e permite que você reutilize código entre controllers diferentes.
+Os componentes são pacotes de lógica que são compartilhados entre controllers. O CakePHP vem com um conjunto fantástico de componentes que você pode usar para ajudar em várias tarefas comuns. Você também pode criar seus próprios componentes. Se você copia e cola parte de código entre controllers, você deve considerar criar seu próprio Component para conter essa funcionalidade. A criação de Components no CakePHP mantém o código dos controllers mais limpos e permite que você reutilize código entre controllers diferentes.
 
 Documentação: [https://book.cakephp.org/3.0/en/controllers/components.html#components](https://book.cakephp.org/3.0/en/controllers/components.html#components)
 
 ## Criando um Component
 
-Para nosso exemplo vamos criar um Component para criação de senhas com caracteres aleatórios. Para isso precisamos criar uma classe no diretório `src/Controller/Component/`, um nome de component seguindo a convenção DO cake seria algo como: `MinhaClasseComponent.php` que extend da classe `Component`.
+Para nosso exemplo, vamos criar um Component para criação de senhas com caracteres aleatórios. Para isso precisamos criar uma classe no diretório `src/Controller/Component/`, um nome de component seguindo a convenção do cake seria algo como: `MinhaClasseComponent.php` que extende da classe `Component`.
 Como umas das filosofias do nosso Framework favorito é facilitar o trabalho, podemos usar o PHP CLI(command line inteface) ou vulgarmente conhecido como Bake.
 
-Para executar o cake, precisamos simplesmente executar o código abaixo.
+Para executar o console do cake, precisamos simplesmente executar o código abaixo.
 ```sh
 bin/cake
 ```
@@ -57,7 +57,7 @@ To get help on a specific command, type `cake shell_name --help`
 
 ```
 
-Note que o nosso shell do cake nos oferece algumas possibilidades para geraçao de código, debug, migrations e etc, a possibilidade é infinita.
+Note que o shell do cake nos oferece algumas possibilidades para geraçao de código, debug, migrations e etc, a possibilidade é infinita.
 
 No nosso caso usaremos o `bake`, agora se executarmos o seguinte código:
 ```sh
@@ -102,9 +102,9 @@ By using `cake bake [name]` you can invoke a specific bake task.
 
 ```
 
-Note que as possibilidades aumentaram, e podemos gerar códigos para controller, models, plugins, inclusive executar consultar no próprio shell.
+Note que as possibilidades aumentaram, e podemos gerar códigos para controller, models, plugins, inclusive executar consultas no próprio shell.
 
-Finalmente vamos criar nosso component(risos), este foi uma pequena introcução ao shell do cakePHP.
+Finalmente vamos criar nosso component, esta foi uma pequena introdução ao shell do cakePHP.
 Em seu terminal execute o seguinte comando:
 
 ```sh
@@ -120,9 +120,9 @@ Creating file /var/www/cakephp.dev/tests/TestCase/Controller/Component/TestCompo
 Wrote `/var/www/cakephp.dev/tests/TestCase/Controller/Component/TestComponentTest.php`
 
 ```
-Note que nosso Bake já gera um arquivo de test, no para este tutorial não o utilizaremos este arquivo, pode inclusive ficar uma pendência para um proximo post.
+Note que nosso Bake já gera um arquivo de test, para executarmos testes uniários, para este tutorial não utilizaremos este arquivo, pode inclusive ficar uma pendência para um proximo post.
 
-Enfim, Nosso component foi criado, agora vamos criar o método responsãvel pela criação de senha:
+Enfim, Nosso componente foi criado, agora vamos criar o método responsável pela criação de senha:
 
 ```php
 <?php
@@ -134,7 +134,8 @@ use Cake\Controller\ComponentRegistry;
 class UserGeneratePassComponent extends Component
 {
     protected $_defaultConfig = [];
-
+    
+    // método responsável pela criação da senha.
     public function generatePass($length = 10, $uppercase = true, $number = true, $symbol = false)
     {
         $lmin           = 'abcdefghijklmnopqrstuvwxyz';
@@ -173,6 +174,7 @@ class UserController extends Controller
 	public function initialize()
     {
         parent::initialize();
+        // importando o nosso component para ficar acessível ao nosso controller.
         $this->loadComponent('UserGeneratePass');
     }
 
@@ -183,6 +185,7 @@ class UserController extends Controller
 
             // Gera uma senha com 15 carecteres de números, letras e símbolos
             if (!$user['password']){
+                // aqui começa a mágica.
                 $user['password'] = $this->UserGeneratePass->generatePass(15, true, true, true);
             }
 
@@ -201,7 +204,7 @@ class UserController extends Controller
 
 ## Conclusão
 
-Esperemos que este tutorial simples ajude você com o seu desenvolvimento, essa é uma dica bem básica mas que pode salvar vidas (risos).
+Esperamos que este tutorial simples ajude você no seu desenvolvimento, essa é uma dica bem básica mas que pode salvar vidas (risos).
 
 Se você tiver dúvidas ou encontrar nossos erros no tutorial acima, deixe um comentário abaixo para nos informar.
 
