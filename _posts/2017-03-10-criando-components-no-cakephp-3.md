@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Criando Components no CakePHP 3"
+header-img: "assets/img/post-bg-05.jpg"
 date: 2017-03-07 10:20:00
 categories: tutorial
 author: Flaviano Honorato
