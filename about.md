@@ -2,6 +2,8 @@
 layout: page
 title: Sobre
 permalink: /sobre/
+description: "Blog CakePHP Brasil"
+header-img: "assets/img/about-bg.jpg"
 ---
 
 # Blog CakePHP Brasil
