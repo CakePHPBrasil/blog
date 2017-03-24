@@ -25,6 +25,7 @@ No topo do arquivo você configura conforme a seguir:
 ---
 layout: post
 title:  "Como contribuir!"
+header-img: "assets/img/sua-imagem-aqui.jpg"
 date:   2016-12-02 12:40:06 -0200
 categories: avisos
 author: 'Erik Figueiredo'
@@ -37,6 +38,7 @@ comments: true
 
  * **layouts**: define o layout desta página, não altere
  * **title**: Título do artigo
+ * **header-img**: Aqui vai a sua imagem(que deve ficar no diretório assets/img).
  * **date**: Data da pubicação no formato YYYY-MM-DD HH:MM:SS, o -0200 é o timezone
  * **categories**: Categorias que este artigo pertence, caprixe nisso
  * **author**: Seu nome
