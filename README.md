@@ -19,5 +19,5 @@ A label verde (help wanted) fica reservada para solicitação de ajuda com taref
 Também podemos trocar uma ideia nas redes sociais:
 
  * [Facebook](https://www.facebook.com/groups/cakebrasil/)
- * [Slack (um IRC moderno, para que não conhece)](http://slack.cakephpbrasil.com.br/)
+ * [Slack (um IRC moderno, para que não conhece)](https://cakephpbrasil.slack.com/)
  * [Telegram](https://telegram.me/cakephpbr)
