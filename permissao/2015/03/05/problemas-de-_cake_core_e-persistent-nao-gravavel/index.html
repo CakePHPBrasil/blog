@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Um problema que pode ser muito comum no Fedora é do” cake_core …” e do “… persistent is not writable …”: Warning: cake_core cache was unable to write ‘cake_d...">
+
+    <title>Problemas de _cake_core_ e persistent não gravável</title>
+
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="/css/style.css"> -->
+
+    <link rel="canonical" href="http://cakephpbrasil.com.br/permissao/2015/03/05/problemas-de-_cake_core_e-persistent-nao-gravavel/">
+    <link rel="alternate" type="application/rss+xml" title="CakePHP Brasil" href="/feed.xml">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+</head>
+
+
+  <body>
+
+    
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CakePHP Brasil</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+        				
+                        <li>
+                            <a href="/sobre/">Sobre</a>
+                        </li>
+        				
+                
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
+
+
+        <header class="intro-header" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Problemas de _cake_core_ e persistent não gravável</h1>
+                    
+                    <span class="meta">Posted by Leonardo Siervo Belini on March 5, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				          <p>Um problema que pode ser muito comum no Fedora é do” <strong><em>cake_core</em> </strong>…” e do “<strong>… persistent is not writable …</strong>”:</p>
+
+<hr />
+
+<!--more-->
+
+<p><b>Warning</b>: <em>cake_core</em> cache was unable to write ‘cake_dev_pt-br’ to File cache in <b>/var/www/html/cakeBlog/lib/Cake/Cache/Cache.php</b> on line <b>310</b></p>
+
+<p><b>Warning</b>: /var/www/html/cakeBlog/app/tmp/cache/persistent/ is not writable in <b>/var/www/html/cakeBlog/lib/Cake/Cache/Engine/FileEngine.php</b> on line <b>337</b></p>
+
+<p><b>Fatal error</b>: Uncaught exception ‘CacheException’ with message ‘Cache engine <em>cake_core</em> is not properly configured.’ in /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php:166 Stack trace: #0 /var/www/html/cakeBlog/lib/Cake/Cache/Cache.php(136): Cache::<em>buildEngine(‘_cake_core</em>’) #1 /var/www/html/cakeBlog/app/Config/core.php(336): Cache::config(‘<em>cake_core</em>’, Array) #2 /var/www/html/cakeBlog/lib/Cake/Core/Configure.php(78): include(‘/var/www/html/c…’) #3 /var/www/html/cakeBlog/lib/Cake/bootstrap.php(171): Configure::bootstrap(true) #4 /var/www/html/cakeBlog/app/webroot/index.php(92): include(‘/var/www/html/c…’) #5 {main} thrown in <b>/var/www/html/cakeBlog/lib/Cake/Cache/Cache.php</b> on line <b>166</b></p>
+
+<hr />
+
+<p>Para resolver esse problema é muito simples:</p>
+<ol>
+	<li>Abre o terminal e execute o seguinte comando (no meu caso usarei o gedit, você pode usar qualquer um de sua preferencia):
+<ol>
+	<li><em>sudo gedit /etc/selinux/config</em></li>
+</ol>
+</li>
+	<li>Procure a linha <strong>SELINUX</strong>.</li>
+	<li>Altera para <strong>disabled</strong>, ficando assim: <strong>SELINUX=disabled</strong></li>
+	<li>Após isso salve e reinicie o computador.</li>
+	<li>Agora é só colocar as permissões nos arquivos do CakePHP que irá funcionar normalmente.</li>
+</ol>
+<p>Link de onde o tutorial foi baseado: <a href="https://groups.google.com/forum/#!topic/cake-php/ULapxcvVIbs" target="_blank">Aqui</a></p>
+
+<p> </p>
+
+                  <hr>
+
+                  <p><small>Quer melhorar este artigo? Vá até o <a href="https://github.com/CakePHPBrasil/blog">repositório deste blog</a></small></p>
+
+
+                  <ul class="pager">
+                    
+                      <li class="previous">
+                            <a href="/video/2015/02/18/mini-curso-cakephp-parte-2-em-andamento/" data-toggle="tooltip" data-placement="top" title="Mini-curso Cake PHP Iniciantes (Em andamento)">&larr; Previous Post</a>
+                      </li>
+                    
+
+                    
+                      <li class="next">
+                          <a href="/avisos/2016/12/02/como-contribuir/" data-toggle="tooltip" data-placement="top" title="Como contribuir!">Next Post &rarr;</a>
+                      </li>
+                    
+                </ul>
+
+                <hr>
+
+                
+                    <div id="disqus_thread"></div>
+                        <script>
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//cakephpbrasil.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+
+            </div><!-- ./col-8 -->
+        </div><!-- ./row -->
+    </div><!-- ./container -->
+
+</article>
+
+
+
+
+    
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        
+                            <a href="https://github.com/CakePHPBrasil" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Gitgub CakePHPBrasil</small>
+                            </a>
+                        
+                            <br>
+                            <a href="https://telegram.me/cakephpbr" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Grupo no Telegram</small>
+                            </a>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <span class="small text-muted">
+                            CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido
+                        </span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="copyright text-muted">
+                    CakePHP Brasil &copy;  2017
+                </p>
+
+            </div><!---col-8 -->
+        </div><!--./row -->
+    </div><!--container -->
+</footer>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/clean-blog.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Este post está destinado a pessoas que vêm me perguntando se existe uma forma de o Cake identificar automaticamente se o servidor é o de desenvolvimento ou d...">
+
+    <title>Como definir o debug habilitado para o servidor local e desabilitado para a hospedagem automaticamente</title>
+
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="/css/style.css"> -->
+
+    <link rel="canonical" href="http://cakephpbrasil.com.br/deploy/2015/02/05/como-definir-o-debug-habilitado-para-o-servidor-local-e-desabilitado-para-a-hospedagem-automaticamente/">
+    <link rel="alternate" type="application/rss+xml" title="CakePHP Brasil" href="/feed.xml">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+</head>
+
+
+  <body>
+
+    
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CakePHP Brasil</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+        				
+                        <li>
+                            <a href="/sobre/">Sobre</a>
+                        </li>
+        				
+                
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
+
+
+        <header class="intro-header" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Como definir o debug habilitado para o servidor local e desabilitado para a hospedagem automaticamente</h1>
+                    
+                    <span class="meta">Posted by Andre Cavallari on February 5, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				          <p>Este post está destinado a pessoas que vêm me perguntando se existe uma forma de o Cake identificar automaticamente se o servidor é o de desenvolvimento ou de produção, e configurar o debug automaticamente conforme o tipo de servidor.</p>
+
+<p>Bom, sabemos que para quem desenvolve, é imprescindível o uso do debug, mas o mesmo deve ser desativado ao público, porém algumas vezes precisamos estar constantemente alterando diretrizes no core.php (ou no app.php no caso do Cake 3.0), e se enviarmos este arquivo para o servidor de produção podemos estar sem querer habilitando o debug na produção, o que é uma falha grave. Mas podemos automatizar o processo do debug e configurá-lo conforme o servidor, para isto existem várias opções.<!--more--></p>
+
+<hr />
+
+<p> </p>
+<h3><strong>1. Minha preferida, utilizar um arquivo de configuração global do PHP</strong></h3>
+<p>O php.ini tem uma diretriz chamada “auto_prepend_file”, esta diretriz define que um arquivo.php será sempre adicionado ao qualquer projeto que você criar com PHP, o mesmo será SEMPRE adicionado no início de qualquer script PHP. Para proceder…</p>
+<ol>
+	<li>Abra o php.ini e procure a linha "auto_prepend_file" e altere para "auto_prepend_file=/caminho/para/global_config.php" por exemplo, (C:\caminho\para\global_config.php no windows), este global_config.php pode estar em qualquer pasta.</li>
+	<li>Crie o arquivo global_config.php na pasta definida no php.ini</li>
+	<li>Insira o código abaixo
+&lt;?PHP
+define('CAKE_DEBUG',2);
+OU... caso trabalhe com Cake 2.x e Cake 3.0 no mesmo servidor utilize:
+define('CAKE2_DEBUG,2);
+define('CAKE3_DEBUG,1);</li>
+	<li>Reinicie o apache</li>
+	<li>abra o arquivo core.php (no cake 2.x) procure pela linha "Configure::write('debug',2);" e altere para "Configure::write('debug',0);" e logo abaixo desta linha insira:
+if(defined('CAKE2_DEBUG')) Configure::write('debug',CAKE_DEBUG);</li>
+	<li>No Cake 3.0 você insere no final do código:
+if(defined('CAKE3_DEBUG')) $config['debug'] = CAKE3_DEBUG;</li>
+</ol>
+<p>Pronto, agora pode alterar o core.php ou app.php a vontade e enviar para o servidor de produção quando quiser que não correrá mais o risco de habilitar o debug sem querer no servidor de produção…</p>
+<h3><strong>2ª opção: Utilizando o SetEvent no Apache.</strong></h3>
+<p>Uma outra opção é utilizar a diretriz SetEnv do Apache, assim terá a diretriz env(‘CAKE2_DEBUG’) na aplicação no servidor de desenvolvimento, e não no de produção.</p>
+<ol>
+	<li>Abra o httpd.conf e insira em qualquer lugar o código:
+SetEnv CAKE2_DEBUG 2
+SetEnv CAKE3_DEBUG 1</li>
+	<li>Salve o httpd.conf e reinicie o apache</li>
+	<li>Abra o core.php da sua aplicação e modifique a linha "Configure::write('debug',2)" para 0, e logo abaixo insira:
+if(env('CAKE2_DEBUG')) Configure::write('debug',env('CAKE2_DEBUG'));</li>
+	<li>No Cake 3.0 insira no final do app.php:
+if(env('CAKE2_DEBUG')) $config['debug'] = env('CAKE3_DEBUG');</li>
+</ol>
+<p>Existe também a possibilidade de alterar o .htaccess da sua aplicação inserindo a diretriz SetEnv, mas todo novo projeto terá que alterar o .htaccess (Lembre-se, sempre o do webroot), inserindo direto no httpd.conf você terá essas opções globais, porém toda vez que precisar alterar terá que reiniciar o apache.</p>
+<h3><strong>3ª Opção: Identificando o servidor local</strong></h3>
+<p>Esta solução foi sugerido por um usuário do grupo do facebook, então estarei postando aqui também.</p>
+<ol>
+	<li>Abra o arquivo core.php e insira as seguintes linhas:
+<span class="UFICommentBody">if (env('SERVER_ADDR') == '127.0.0.1' ||
+strstr(env('SERVER_NAME'), 'dev') !== false ||
+strstr(env('SERVER_NAME'), 'localhost') !== false ||
+// C0A8 stands for IPv6 Address
+strstr(env('SERVER_ADDR'), 'C0A8') !== false ||
+strstr(env('SERVER_ADDR'), '192.168') !== false
+) {
+Configure::write('debug', 2);
+} else {
+Configure::write('debug', 0);
+}</span></li>
+</ol>
+<h3><strong>Conclusão</strong></h3>
+<p>As três opções listadas aqui vão trazer um resultado satisfatório, particularmente prefiro a primeira opção, pois você pode alterar o debug através do arquivo de configuração global a qualquer momento sem a necessidade de reiniciar o apache para surtir efeito. A segunda opção é uma sugestão dos mantenedores do Cake, gosto muido desta opção também porém toda vez que precisar alterar a diretriz terá que reiniciar o apache (Exceto no caso de utilizar o .htaccess, aí não será necessário reiniciar, mas se ocorrer de sem querer enviar para produção o .htaccess, estará habilitando o debug ao público).</p>
+
+                  <hr>
+
+                  <p><small>Quer melhorar este artigo? Vá até o <a href="https://github.com/CakePHPBrasil/blog">repositório deste blog</a></small></p>
+
+
+                  <ul class="pager">
+                    
+                      <li class="previous">
+                            <a href="/plugins/2015/01/30/cakegallery-do-hugo-dias/" data-toggle="tooltip" data-placement="top" title="Cakegallery do Hugo Dias!">&larr; Previous Post</a>
+                      </li>
+                    
+
+                    
+                      <li class="next">
+                          <a href="/video/2015/02/18/mini-curso-cakephp-parte-2-em-andamento/" data-toggle="tooltip" data-placement="top" title="Mini-curso Cake PHP Iniciantes (Em andamento)">Next Post &rarr;</a>
+                      </li>
+                    
+                </ul>
+
+                <hr>
+
+                
+                    <div id="disqus_thread"></div>
+                        <script>
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//cakephpbrasil.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+
+            </div><!-- ./col-8 -->
+        </div><!-- ./row -->
+    </div><!-- ./container -->
+
+</article>
+
+
+
+
+    
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        
+                            <a href="https://github.com/CakePHPBrasil" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Gitgub CakePHPBrasil</small>
+                            </a>
+                        
+                            <br>
+                            <a href="https://telegram.me/cakephpbr" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Grupo no Telegram</small>
+                            </a>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <span class="small text-muted">
+                            CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido
+                        </span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="copyright text-muted">
+                    CakePHP Brasil &copy;  2017
+                </p>
+
+            </div><!---col-8 -->
+        </div><!--./row -->
+    </div><!--container -->
+</footer>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/clean-blog.js"></script>
+
+
+  </body>
+</html>

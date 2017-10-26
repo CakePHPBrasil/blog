@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="O que é um Component segundo a doc do CakePHP">
+
+    <title>Criando Components no CakePHP 3</title>
+
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="/css/style.css"> -->
+
+    <link rel="canonical" href="http://cakephpbrasil.com.br/tutorial/2017/03/07/criando-components-no-cakephp-3/">
+    <link rel="alternate" type="application/rss+xml" title="CakePHP Brasil" href="/feed.xml">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+</head>
+
+
+  <body>
+
+    
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CakePHP Brasil</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+        				
+                        <li>
+                            <a href="/sobre/">Sobre</a>
+                        </li>
+        				
+                
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
+
+
+        <header class="intro-header" style="background-image: url('/assets/img/post-bg-05.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Criando Components no CakePHP 3</h1>
+                    
+                    <span class="meta">Posted by Flaviano Honorato on March 7, 2017</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				          <h2 id="o-que-é-um-component-segundo-a-doc-do-cakephp">O que é um Component segundo a doc do CakePHP</h2>
+
+<p>Os componentes são pacotes de lógica que são compartilhados entre controllers. O CakePHP vem com um conjunto fantástico de componentes que você pode usar para ajudar em várias tarefas comuns. Você também pode criar seus próprios componentes. Se você copia e cola parte de código entre controllers, você deve considerar criar seu próprio Component para conter essa funcionalidade. A criação de Components no CakePHP mantém o código dos controllers mais limpos e permite que você reutilize código entre controllers diferentes.</p>
+
+<p>Documentação: <a href="https://book.cakephp.org/3.0/en/controllers/components.html#components">https://book.cakephp.org/3.0/en/controllers/components.html#components</a></p>
+
+<h2 id="criando-um-component">Criando um Component</h2>
+
+<p>Para nosso exemplo, vamos criar um Component para criação de senhas com caracteres aleatórios. Para isso precisamos criar uma classe no diretório <code class="highlighter-rouge">src/Controller/Component/</code>, um nome de component seguindo a convenção do cake seria algo como: <code class="highlighter-rouge">MinhaClasseComponent.php</code> que extende da classe <code class="highlighter-rouge">Component</code>.
+Como umas das filosofias do nosso Framework favorito é facilitar o trabalho, podemos usar o PHP CLI(command line inteface) ou vulgarmente conhecido como Bake.</p>
+
+<p>Para executar o console do cake, precisamos simplesmente executar o código abaixo.</p>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>bin/cake
+</code></pre>
+</div>
+<p>Com esse comando teremos uma saída no terminal parecido com isso:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Welcome to CakePHP v3.3.14 Console
+---------------------------------------------------------
+App : src
+Path: /var/www/cakephp.dev/src/
+PHP: 7.0.16
+---------------------------------------------------------
+Current Paths:
+App: src
+Path: /var/www/cakephp.dev/src
+Core: /var/www/cakephp.dev/vendor/cakephp/cakephp
+
+Available Shells:
+
+<span class="o">[</span>Bake] bake
+
+<span class="o">[</span>DebugKit] benchmark, whitespace
+
+<span class="o">[</span>Migrations] migrations
+
+<span class="o">[</span>CORE] cache, i18n, orm_cache, plugin, routes, server
+
+<span class="o">[</span>app] console
+
+To run an app or core <span class="nb">command</span>, <span class="nb">type</span> <span class="sb">`</span>cake shell_name <span class="o">[</span>args]<span class="sb">`</span>
+To run a plugin <span class="nb">command</span>, <span class="nb">type</span> <span class="sb">`</span>cake Plugin.shell_name <span class="o">[</span>args]<span class="sb">`</span>
+To get <span class="nb">help </span>on a specific <span class="nb">command</span>, <span class="nb">type</span> <span class="sb">`</span>cake shell_name --help<span class="sb">`</span>
+
+</code></pre>
+</div>
+
+<p>Note que o shell do cake nos oferece algumas possibilidades para geraçao de código, debug, migrations e etc, a possibilidade é infinita.</p>
+
+<p>No nosso caso usaremos o <code class="highlighter-rouge">bake</code>, agora se executarmos o seguinte código:</p>
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>bin/cake bake
+</code></pre>
+</div>
+
+<p>Teremos a seguinte saída no nosso terminal:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Welcome to CakePHP v3.3.14 Console
+---------------------------------------------------------------
+App : src
+Path: /var/www/cakephp.dev/src/
+PHP : 7.0.16
+---------------------------------------------------------------
+The following commands can be used to generate skeleton code <span class="k">for </span>your application.
+
+Available bake commands:
+
+- all
+- behavior
+- cell
+- component
+- controller
+- fixture
+- form
+- helper
+- mailer
+- migration
+- migration_diff
+- migration_snapshot
+- model
+- plugin
+- seed
+- shell
+- shell_helper
+- task
+- template
+- <span class="nb">test
+
+</span>By using <span class="sb">`</span>cake bake <span class="o">[</span>name]<span class="sb">`</span> you can invoke a specific bake task.
+
+</code></pre>
+</div>
+
+<p>Note que as possibilidades aumentaram, e podemos gerar códigos para controller, models, plugins, inclusive executar consultas no próprio shell.</p>
+
+<p>Finalmente vamos criar nosso component, esta foi uma pequena introdução ao shell do cakePHP.
+Em seu terminal execute o seguinte comando:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>bin/cake bake component UserGeneratePass
+</code></pre>
+</div>
+<p>A saída no terminal será algo como:</p>
+
+<div class="language-sh highlighter-rouge"><pre class="highlight"><code>Creating file /var/www/cakephp.dev/src/Controller/Component/TestComponentTest.php
+Wrote <span class="sb">`</span>/var/www/cakephp.dev/src/Controller/Component/TestComponentTest.php<span class="sb">`</span>
+
+Creating file /var/www/cakephp.dev/tests/TestCase/Controller/Component/TestComponentTest.php
+Wrote <span class="sb">`</span>/var/www/cakephp.dev/tests/TestCase/Controller/Component/TestComponentTest.php<span class="sb">`</span>
+
+</code></pre>
+</div>
+<p>Note que nosso Bake já gera um arquivo de test, para executarmos testes uniários, para este tutorial não utilizaremos este arquivo, pode inclusive ficar uma pendência para um proximo post.</p>
+
+<p>Enfim, Nosso componente foi criado, agora vamos criar o método responsável pela criação de senha:</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">App\Controller\Component</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Cake\Controller\Component</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Cake\Controller\ComponentRegistry</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UserGeneratePassComponent</span> <span class="k">extends</span> <span class="nx">Component</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$_defaultConfig</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="c1">// método responsável pela criação da senha.
+</span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">generatePass</span><span class="p">(</span><span class="nv">$length</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="nv">$uppercase</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$number</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">$symbol</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$lmin</span>           <span class="o">=</span> <span class="s1">'abcdefghijklmnopqrstuvwxyz'</span><span class="p">;</span>
+        <span class="nv">$lmai</span>           <span class="o">=</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span><span class="p">;</span>
+        <span class="nv">$num</span>            <span class="o">=</span> <span class="s1">'1234567890'</span><span class="p">;</span>
+        <span class="nv">$simb</span>           <span class="o">=</span> <span class="s1">'!@#$%*-'</span><span class="p">;</span>
+        <span class="nv">$return</span>         <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+        <span class="nv">$caracters</span>      <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+        <span class="nv">$caracters</span>      <span class="o">.=</span> <span class="nv">$lmin</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$uppercase</span><span class="p">)</span> <span class="nv">$caracters</span> <span class="o">.=</span> <span class="nv">$lmai</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$number</span><span class="p">)</span> <span class="nv">$caracters</span> <span class="o">.=</span> <span class="nv">$num</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$symbol</span><span class="p">)</span> <span class="nv">$caracters</span> <span class="o">.=</span> <span class="nv">$simb</span><span class="p">;</span>
+
+        <span class="nv">$len</span> <span class="o">=</span> <span class="nb">strlen</span><span class="p">(</span><span class="nv">$caracters</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nv">$n</span> <span class="o">&lt;=</span> <span class="nv">$length</span><span class="p">;</span> <span class="nv">$n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+             <span class="nv">$rand</span> <span class="o">=</span> <span class="nb">mt_rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">$len</span><span class="p">);</span>
+             <span class="nv">$return</span> <span class="o">.=</span> <span class="nv">$caracters</span><span class="p">[</span><span class="nv">$rand</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$return</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="exemplo-de-uso">Exemplo de uso</h2>
+<p>No seu controller <code class="highlighter-rouge">php UserController.php</code> por exemplo, você pode chamar o Component da seguinte forma:</p>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="k">class</span> <span class="nc">UserController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+	<span class="k">public</span> <span class="k">function</span> <span class="nf">initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">parent</span><span class="o">::</span><span class="na">initialize</span><span class="p">();</span>
+        <span class="c1">// importando o nosso component para ficar acessível ao nosso controller.
+</span>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">loadComponent</span><span class="p">(</span><span class="s1">'UserGeneratePass'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">newEntity</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s1">'post'</span><span class="p">))</span> <span class="p">{</span>
+
+            <span class="c1">// Gera uma senha com 15 carecteres de números, letras e símbolos
+</span>            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]){</span>
+                <span class="c1">// aqui começa a mágica.
+</span>                <span class="nv">$user</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">UserGeneratePass</span><span class="o">-&gt;</span><span class="na">generatePass</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">patchEntity</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">data</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Users</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">success</span><span class="p">(</span><span class="s1">'Usuário adicionado com sucesso.'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'class'</span> <span class="o">=&gt;</span> <span class="s1">'alert alert-info'</span><span class="p">]);</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">([</span><span class="s1">'action'</span> <span class="o">=&gt;</span> <span class="s1">'index'</span><span class="p">]);</span>
+            <span class="p">}</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Flash</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nx">__</span><span class="p">(</span><span class="s1">'Não foi possível adicionar este usuário, por favor tente novamente.'</span><span class="p">));</span>
+        <span class="p">}</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">'user'</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="conclusão">Conclusão</h2>
+
+<p>Esperamos que este tutorial simples ajude você no seu desenvolvimento, essa é uma dica bem básica mas que pode salvar vidas (risos).</p>
+
+<p>Se você tiver dúvidas ou encontrar nossos erros no tutorial acima, deixe um comentário abaixo para nos informar.</p>
+
+<p>Caso tenha ficado alguma dúvida, ou tenha outra solução, fique a vontade para deixar seu comentário, ou criar um PR com seu artigo, tenho certeza que a comunidade agradece.</p>
+
+                  <hr>
+
+                  <p><small>Quer melhorar este artigo? Vá até o <a href="https://github.com/CakePHPBrasil/blog">repositório deste blog</a></small></p>
+
+
+                  <ul class="pager">
+                    
+                      <li class="previous">
+                            <a href="/dicas/2017/03/02/reconectar-o-mysql-manualmente-no-cakephp-3/" data-toggle="tooltip" data-placement="top" title="Reconectar o MySQL manualmente no CakePHP 3">&larr; Previous Post</a>
+                      </li>
+                    
+
+                    
+                      <li class="next">
+                          <a href="/documentacao/2017/04/10/ei-dev-cakephp-por-que-voce-nao-contribui/" data-toggle="tooltip" data-placement="top" title="Ei, Dev Cakephp. Por que você não contribui?">Next Post &rarr;</a>
+                      </li>
+                    
+                </ul>
+
+                <hr>
+
+                
+                    <div id="disqus_thread"></div>
+                        <script>
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//cakephpbrasil.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+
+            </div><!-- ./col-8 -->
+        </div><!-- ./row -->
+    </div><!-- ./container -->
+
+</article>
+
+
+
+
+    
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        
+                            <a href="https://github.com/CakePHPBrasil" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Gitgub CakePHPBrasil</small>
+                            </a>
+                        
+                            <br>
+                            <a href="https://telegram.me/cakephpbr" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Grupo no Telegram</small>
+                            </a>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <span class="small text-muted">
+                            CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido
+                        </span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="copyright text-muted">
+                    CakePHP Brasil &copy;  2017
+                </p>
+
+            </div><!---col-8 -->
+        </div><!--./row -->
+    </div><!--container -->
+</footer>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/clean-blog.js"></script>
+
+
+  </body>
+</html>

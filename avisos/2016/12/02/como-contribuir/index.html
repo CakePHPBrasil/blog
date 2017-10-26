@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bem vindos ao novo Blog do CakePHP Brasil, infelizmente o projeto com Wordpress não é muito simples de manter pelo motivo de ser mais um dashboard para acomp...">
+
+    <title>Como contribuir!</title>
+
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="/css/style.css"> -->
+
+    <link rel="canonical" href="http://cakephpbrasil.com.br/avisos/2016/12/02/como-contribuir/">
+    <link rel="alternate" type="application/rss+xml" title="CakePHP Brasil" href="/feed.xml">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+</head>
+
+
+  <body>
+
+    
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CakePHP Brasil</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+        				
+                        <li>
+                            <a href="/sobre/">Sobre</a>
+                        </li>
+        				
+                
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
+
+
+        <header class="intro-header" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Como contribuir!</h1>
+                    
+                    <span class="meta">Posted by Erik Figueiredo on December 2, 2016</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				          <p>Bem vindos ao novo Blog do CakePHP Brasil, infelizmente o projeto com Wordpress não é muito simples de manter pelo motivo de ser mais um dashboard para acompanhar, algumas pessoas acabaram ficando chateadas comigo, então, em uma tentativa de ressucitar o blog, montei usando Jekyll, Jenkins e GitHub, assim a coisa fica mais automatizada e o gerenciamento se da através do GitHub, aonde eu já estou logado o dia todo.</p>
+
+<p>Uma vantagem desta nova abordagem é forçar a comunidade a interagir mais com o GitHub e quem sabe contruir seu portfólio por lá.</p>
+
+<p>Para saber o que tem pra fazer em cada repostório do GitHub do CakePHP Brasil, entre nas issues de cada projeto, por exemplo, você quer ver o que pode ser melhorado neste projeto, visite nossa organização no link <a href="https://github.com/CakePHPBrasil">github.com/CakePHPBrasil</a>, escolha o repositório <strong>blog</strong> na lista e depois clique em <strong>issues</strong> no topo, por exemplo, caso você queira ver as ideias de artigos enviadas pela comunidade, <a href="https://github.com/CakePHPBrasil/blog/issues?q=is%3Aopen+is%3Aissue+label%3Aarticle">clique aqui</a>.</p>
+
+<h2 id="quero-enviar-um-artigo">Quero enviar um artigo</h2>
+
+<p>Para enviar novos artigos é muito simples, dentro do diretório <code class="highlighter-rouge">_posts</code> adicione um arquivo seguindo a seguinte convenção <code class="highlighter-rouge">YYYY-MM-DD-nome-do-post.markdown</code> em seguida adicione o seu texto usando o formato markdown (é bem simples, não se assuste).</p>
+
+<p>No topo do arquivo você configura conforme a seguir:</p>
+
+<figure class="highlight"><pre><code class="language-plan" data-lang="plan">---
+layout: post
+title:  "Como contribuir!"
+header-img: "assets/img/sua-imagem-aqui.jpg"
+date:   2016-12-02 12:40:06 -0200
+categories: avisos
+author: 'Erik Figueiredo'
+author_url: 'http://www.webdevbr.com.br'
+author_url_label: 'WebDevBr'
+comments: true
+---</code></pre></figure>
+
+<ul>
+  <li><strong>layouts</strong>: define o layout desta página, não altere</li>
+  <li><strong>title</strong>: Título do artigo</li>
+  <li><strong>header-img</strong>: Aqui vai a sua imagem(que deve ficar no diretório assets/img).</li>
+  <li><strong>date</strong>: Data da pubicação no formato YYYY-MM-DD HH:MM:SS, o -0200 é o timezone</li>
+  <li><strong>categories</strong>: Categorias que este artigo pertence, caprixe nisso</li>
+  <li><strong>author</strong>: Seu nome</li>
+  <li><strong>author_url</strong>: Um link que você queira postar, para que as pessoas te encontrem, seu portifólio, enfim…</li>
+  <li><strong>author_ur_label</strong>: O texto ancora para seu link</li>
+  <li><strong>comments</strong>: habilita e desabilita comentários</li>
+</ul>
+
+<p>O Jekyll que faz o build para o HTML fornece alguns recursos legais, como este <strong>code highlight</strong> a seguir:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Controller</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UsersController</span> <span class="k">extends</span> <span class="nx">AppController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">login</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="sd">/**...**/</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Assim que receber seu pull request vamos analizar e aceitar ou indicar correções, se necessário.</p>
+
+<p>Precisa de ideias para artigos ou quer ajudar alguém, <a href="https://github.com/CakePHPBrasil/blog/issues?q=is%3Aopen+is%3Aissue+label%3Aarticle">clique aqui</a>.</p>
+
+<p>Qualquer coisa fico a disposição de vocês!</p>
+
+<p>Obs.: Não esqueçam de adicionar seu nome e um link no fim do artigo para que quem ler e quiser algum serviço ou trocar uma ideia com vocês, possam encontrá-los.</p>
+
+
+                  <hr>
+
+                  <p><small>Quer melhorar este artigo? Vá até o <a href="https://github.com/CakePHPBrasil/blog">repositório deste blog</a></small></p>
+
+
+                  <ul class="pager">
+                    
+                      <li class="previous">
+                            <a href="/permissao/2015/03/05/problemas-de-_cake_core_e-persistent-nao-gravavel/" data-toggle="tooltip" data-placement="top" title="Problemas de _cake_core_ e persistent não gravável">&larr; Previous Post</a>
+                      </li>
+                    
+
+                    
+                      <li class="next">
+                          <a href="/rotas/2017/03/02/rotas-transformar-users-em-usuarios/" data-toggle="tooltip" data-placement="top" title="CakePHP - Rotas - Transformar /users em /usuarios">Next Post &rarr;</a>
+                      </li>
+                    
+                </ul>
+
+                <hr>
+
+                
+                    <div id="disqus_thread"></div>
+                        <script>
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//cakephpbrasil.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+
+            </div><!-- ./col-8 -->
+        </div><!-- ./row -->
+    </div><!-- ./container -->
+
+</article>
+
+
+
+
+    
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        
+                            <a href="https://github.com/CakePHPBrasil" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Gitgub CakePHPBrasil</small>
+                            </a>
+                        
+                            <br>
+                            <a href="https://telegram.me/cakephpbr" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Grupo no Telegram</small>
+                            </a>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <span class="small text-muted">
+                            CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido
+                        </span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="copyright text-muted">
+                    CakePHP Brasil &copy;  2017
+                </p>
+
+            </div><!---col-8 -->
+        </div><!--./row -->
+    </div><!--container -->
+</footer>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/clean-blog.js"></script>
+
+
+  </body>
+</html>

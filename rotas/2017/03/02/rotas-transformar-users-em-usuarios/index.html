@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentação">
+
+    <title>CakePHP - Rotas - Transformar /users em /usuarios</title>
+
+
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="/css/style.css"> -->
+
+    <link rel="canonical" href="http://cakephpbrasil.com.br/rotas/2017/03/02/rotas-transformar-users-em-usuarios/">
+    <link rel="alternate" type="application/rss+xml" title="CakePHP Brasil" href="/feed.xml">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+</head>
+
+
+  <body>
+
+    
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CakePHP Brasil</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                
+        				
+                        <li>
+                            <a href="/sobre/">Sobre</a>
+                        </li>
+        				
+                
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+</nav>
+
+
+        <header class="intro-header" style="background-image: url('/assets/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>CakePHP - Rotas - Transformar /users em /usuarios</h1>
+                    
+                    <span class="meta">Posted by Maicon Pinto on March 2, 2017</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				          <h2 id="documentação">Documentação</h2>
+
+<p><a href="https://book.cakephp.org/3.0/en/development/routing.html">Routing</a></p>
+
+<h2 id="desafio">Desafio</h2>
+
+<p>Trasnformar as rotas <code class="highlighter-rouge">/users</code> em <code class="highlighter-rouge">/usuarios</code>.</p>
+
+<h2 id="solução">Solução</h2>
+
+<div class="language-php highlighter-rouge"><pre class="highlight"><code>// config/routes.php
+
+$routes-&gt;connect('/usuarios', ['controller' =&gt; 'Users']);
+$routes-&gt;connect('/usuarios/:action', ['controller' =&gt; 'Users']);
+$routes-&gt;connect('/usuarios/:action/*', ['controller' =&gt; 'Users']);
+</code></pre>
+</div>
+
+<h2 id="explicação">Explicação</h2>
+
+<p>A rota <code class="highlighter-rouge">/usuarios</code> servirá para quando o usuário digitar apenas <code class="highlighter-rouge">/usuarios</code>. Mas, se tivesse apenas esta rota, você não conseguiria acessar a url <code class="highlighter-rouge">/usuarios/add</code>, pois retornaria um erro que não foi encontrado o <strong>UsuariosController</strong>.
+Isso aconteceria, pois as actions não estão mapeadas, para isso, há a segunda rota <code class="highlighter-rouge">/usuarios/:action</code>.
+Assim, qualquer action fica coberta por esta rota. Exemplos:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">/users/login</code> =&gt; <code class="highlighter-rouge">/usuarios/login</code></li>
+  <li><code class="highlighter-rouge">/users/logout</code> =&gt; <code class="highlighter-rouge">/usuarios/logout</code></li>
+</ul>
+
+<p>Se você não tivesse urls passando parâmetros, como <code class="highlighter-rouge">/usuarios/view/1</code>, só a primeira e segunda rotas, já estaria ok.
+Mas, urls como da view, ainda não estão funcionando.
+Por isso, usa-se um coringa ‘*’, para dizer que qualquer coisa depois da action fosse redirecionada para o controller Users, e action correspondente.</p>
+
+<p>Bom, essa foi a dica de hoje. Para quem está acostumado a utilizar o CakePHP, esse tutorial é bem básico, mas para quem está começando, deve ajudar.</p>
+
+<p>Eu não estou acostumado a escrever, por isso, prefiro encurtar as palavras e não enrolar muito.</p>
+
+<p>Caso tenha ficado alguma dúvida, ou tenha outra solução, fique a vontade para deixar seu comentário, ou criar um PR com seu artigo, tenho certeza que a comunidade agradece.</p>
+
+                  <hr>
+
+                  <p><small>Quer melhorar este artigo? Vá até o <a href="https://github.com/CakePHPBrasil/blog">repositório deste blog</a></small></p>
+
+
+                  <ul class="pager">
+                    
+                      <li class="previous">
+                            <a href="/avisos/2016/12/02/como-contribuir/" data-toggle="tooltip" data-placement="top" title="Como contribuir!">&larr; Previous Post</a>
+                      </li>
+                    
+
+                    
+                      <li class="next">
+                          <a href="/dicas/2017/03/02/reconectar-o-mysql-manualmente-no-cakephp-3/" data-toggle="tooltip" data-placement="top" title="Reconectar o MySQL manualmente no CakePHP 3">Next Post &rarr;</a>
+                      </li>
+                    
+                </ul>
+
+                <hr>
+
+                
+                    <div id="disqus_thread"></div>
+                        <script>
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                                var d = document, s = d.createElement('script');
+                                s.src = '//cakephpbrasil.disqus.com/embed.js';
+                                s.setAttribute('data-timestamp', +new Date());
+                                (d.head || d.body).appendChild(s);
+                            })();
+                        </script>
+                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                
+
+            </div><!-- ./col-8 -->
+        </div><!-- ./row -->
+    </div><!-- ./container -->
+
+</article>
+
+
+
+
+    
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        
+                            <a href="https://github.com/CakePHPBrasil" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Gitgub CakePHPBrasil</small>
+                            </a>
+                        
+                            <br>
+                            <a href="https://telegram.me/cakephpbr" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                                </span>
+                                <small>Grupo no Telegram</small>
+                            </a>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <span class="small text-muted">
+                            CakePHP Brasil é uma comunidade de desenvolvedores apaixonados pelo framework PHP de desenvolvimento rápido
+                        </span>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="copyright text-muted">
+                    CakePHP Brasil &copy;  2017
+                </p>
+
+            </div><!---col-8 -->
+        </div><!--./row -->
+    </div><!--container -->
+</footer>
+
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/clean-blog.js"></script>
+
+
+  </body>
+</html>
