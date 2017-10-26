@@ -40,5 +40,6 @@ Desde que decidi começar a contribuir com as traduções, eu traduzi as página
 
  - [Views](https://book.cakephp.org/3.0/pt/views.html)
  - [View Cells](https://book.cakephp.org/3.0/pt/views/cells.html)
+ - [Temas](https://book.cakephp.org/3.0/pt/views/themes.html)
 
 Se você encontrou algum problema nas minhas traduções, por favor, submeta um pull request para o repositório oficial com a correção. Você já contribuiu com a tradução/correção de alguma página do cookbook? Existe alguma página muito importante do cookbook que não possui tradução para pt-br? Deixe seu comentário!
