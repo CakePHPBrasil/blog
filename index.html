@@ -7,15 +7,37 @@ header-img: "assets/img/home-bg.jpg"
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">            {{ post.title }}
+        <h2 class="post-title">
+            {{ post.title }}
         </h2>
+
         {% if post.subtitle %}
         <h3 class="post-subtitle">
             {{ post.subtitle }}
         </h3>
         {% endif %}
     </a>
-    <p class="post-meta">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}</p>
+    <p class="post-meta">
+        Posted by 
+            {% if post.author %}
+
+                {% for page in site.pages %}
+                    {% if page.author == post.author %}
+                        {% assign has_author_link = true %}
+
+                        <a href="{{ page.url | prepend: site.baseurl }}">{{ page.author }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if has_author_link != true %}
+                    {{ post.author }}
+                {% endif %}
+                
+            {% else %}
+                {{ site.title }}
+            {% endif %} 
+        on 
+            {{ post.date | date: "%B %-d, %Y" }}</p>
 </div>
 <hr>
 {% endfor %}

@@ -8,4 +8,10 @@ header-img: "assets/img/post-bg-04.jpg"
 
 # Autores
 
-<a href="{{ '/autores/maiconpinto' | prepend: site.baseurl }}">Maicon Pinto</a>
+{% for page in site.pages %}
+    {% if page.author != null %}
+<p>
+    <a href="{{ page.url | prepend: site.baseurl }}">{{ page.author }}</a>
+</p>
+    {% endif %}
+{% endfor %}
