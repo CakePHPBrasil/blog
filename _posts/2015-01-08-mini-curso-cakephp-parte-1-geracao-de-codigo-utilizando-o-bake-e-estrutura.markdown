@@ -15,7 +15,7 @@ Nestes tutoriais eu tento usar o mais comum de vermos no mercado, no dia a dia d
 Espero que gostem das video aulas, e me sigam la no Youtube.
 Um grande abraço.
 
-{% youtube QtP3y8dvKQQ %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QtP3y8dvKQQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 O código que eu fiz neste tutorial esta no meu GitHub <a title="https://github.com/waldemarnt/tutorial-cakephp/tree/fase1" href="https://github.com/waldemarnt/tutorial-cakephp/tree/fase1" target="_blank">https://github.com/waldemarnt/tutorial-cakephp/tree/fase1</a>
 

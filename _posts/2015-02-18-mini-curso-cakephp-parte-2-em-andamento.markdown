@@ -10,17 +10,18 @@ comments: true
 ---
 AULA 01 - INTRODUÇÃO-(Aula  Online Gravada)
 
-{% youtube f6dZUW9yfU8 %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/f6dZUW9yfU8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 AULA 02 - MODELAGEM
 
-{% youtube DhvhTewUWzU %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DhvhTewUWzU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 AULA 03 - MVC
 
-{% youtube 1SQ2gtV1y7Q %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1SQ2gtV1y7Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 AULA 04 - UTILIZANDO O BAKE
 
-{% youtube nZabeztFn9k %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nZabeztFn9k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Aguardem a próxima aula...
