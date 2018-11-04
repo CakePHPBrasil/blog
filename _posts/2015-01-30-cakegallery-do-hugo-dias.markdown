@@ -14,18 +14,18 @@ Ele criou um upload de imagens para cake super show de bola, então fica a dica 
 
 <h3>Apresentação do projeto</h3>
 
-{% youtube AhU16ji_i9g %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AhU16ji_i9g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <h3>Tutorial de instalação</h3>
 
-{% youtube OEgVQQTaWkE %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OEgVQQTaWkE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <h3>Como usar a ferramenta</h3>
 
-{% youtube kxKRSY4Tdjc %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kxKRSY4Tdjc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <h3>Utilizando os Helpers</h3>
 
-{% youtube nKnjlPbMj-g %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nKnjlPbMj-g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Bons estudos :D
